@@ -1,0 +1,97 @@
+---
+import { Picture } from "@astrojs/image/components";
+import { Icon } from "astro-icon";
+import starhipImage from "~/assets/starship.svg";
+import HeroImage from "~/components/hero-image.astro";
+import Starfield from "~/components/starfield.astro";
+import GitHubCorner from "./github-corner.astro";
+
+const widths = [350, 600];
+const sizes = "(min-width: 640px) 49vw, 57vw";
+---
+
+<section class="relative h-full bg-black">
+  <Starfield />
+  <GitHubCorner />
+  <div id="splash-bg-fallback" class="absolute inset-0 hidden opacity-40">
+    <HeroImage />
+  </div>
+  <div class="relative grid h-full place-items-center sm:grid-cols-2">
+    <h2
+      class="flex flex-col gap-2 self-end sm:gap-4 sm:self-auto sm:justify-self-end"
+    >
+      <div
+        class="gradient-text z-50 pb-12 text-center text-8xl font-extrabold tracking-tighter md:pr-10"
+      >
+        Frontiers<br />To<br />Space
+      </div>
+    </h2>
+    <div
+      id="spaceship"
+      class="z-40 w-2/3 max-w-3xl self-start sm:w-10/12 sm:self-auto sm:justify-self-start md:pr-14"
+    >
+      <Picture
+        class="h-full w-full rotate-12 object-cover"
+        src={starhipImage}
+        widths={widths}
+        sizes={sizes}
+        loading="eager"
+        alt="A spaceship embarking on a journey to space"
+      />
+    </div>
+    <!-- center horintantal -->
+    <div
+      class="absolute bottom-2 left-1/2 z-50 h-12 w-12 -translate-x-1/2 transform pb-4"
+      id="scroll-down"
+    >
+      <Icon name="mdi:arrow-down-circle-outline" />
+    </div>
+  </div>
+
+  <noscript>
+    <style>
+      #splash-bg-fallback {
+        display: block;
+      }
+    </style>
+  </noscript>
+
+  <style>
+    @keyframes float {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(0, 30px, 0);
+      }
+    }
+
+    #spaceship {
+      animation: float linear 2.5s infinite alternate;
+      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #spaceship {
+        @apply animate-none;
+      }
+
+      :global(#starfield) {
+        @apply hidden;
+      }
+
+      #splash-bg-fallback {
+        @apply block;
+      }
+    }
+  </style>
+</section>
+
+<script>
+  document.querySelector("#scroll-down")?.addEventListener("click", () => {
+    document.querySelector("#intro")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  });
+</script>

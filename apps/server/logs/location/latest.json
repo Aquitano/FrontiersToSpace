@@ -1,0 +1,1 @@
+{"command":"get","result":"ok","what":"loc","found":1,"entries":[{"class":"a","name":"DL7HMX-15","type":"w","time":"2022-09-04T07:25:36.000Z","lasttime":"2023-05-02T16:50:33.000Z","lat":48.563,"lng":13.47067,"symbol":"/_","srccall":"DL7HMX-15","dstcall":"","comment":".weewx-4.10.2-FineOffsetUSB","path":"TCPIP*,qAC,SECOND"}]}

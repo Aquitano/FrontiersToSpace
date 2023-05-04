@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon";
+import ContentSection from "~/components/content-section.astro";
+---
+
+<ContentSection title="Frontiers to Space" id="intro">
+  <!-- <Icon slot="eyebrow" name="logomark" class="h-32" /> -->
+  <Fragment slot="lead">
+    Mutige Schüler erkunden <span class="text-primary">Grenzen des Himmels</span
+    >, vereinen Wissenschaften in spektakulärer <span class="text-primary"
+      >Stratosphärenballon-Expedition</span
+    >.
+  </Fragment>
+  <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+    <a
+      href="https://docs.astro.build/"
+      class="flex items-center justify-center gap-3 border-2 border-current px-6 py-4"
+    >
+      <Icon pack="mdi" name="telescope" class="h-8" />
+      <span>Karte & Daten</span>
+    </a>
+    <a
+      href="https://astro.new/"
+      class="flex items-center justify-center gap-3 border-2 border-current px-6 py-4"
+    >
+      <Icon pack="mdi" name="rocket" class="h-8" />
+      <span>Aktuelles</span>
+    </a>
+  </div>
+</ContentSection>
