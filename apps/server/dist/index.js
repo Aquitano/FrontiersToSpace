@@ -26,20 +26,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const server_1 = require("@trpc/server");
 const trpcExpress = __importStar(require("@trpc/server/adapters/express"));
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
-const t = server_1.initTRPC.create();
-const router = t.router;
-const appRouter = router({
-    hello: t.procedure.query(() => 'Hello world III'),
-});
+const main_1 = require("./src/main");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 const port = 8080;
 app.use('/trpc', trpcExpress.createExpressMiddleware({
-    router: appRouter,
+    router: main_1.appRouter,
     createContext() {
         return {};
     },
@@ -49,4 +44,10 @@ app.get('/', (req, res) => {
 });
 app.listen(port, () => {
     console.log(`api-server listening at http://localhost:${port}`);
+    // const queryData = setInterval(async () => {
+    //     await getLocations();
+    //     await new Promise((resolve) => setTimeout(resolve, 10 * 1000));
+    //     await getWeather();
+    //     console.log('Updated data');
+    // }, 2 * 60 * 1000 /* 2 minutes */);
 });

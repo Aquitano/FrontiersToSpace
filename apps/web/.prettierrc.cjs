@@ -1,7 +1,4 @@
 module.exports = {
-  plugins: [
-    "prettier-plugin-astro",
-    "prettier-plugin-tailwindcss", // MUST come last
-  ],
+  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
   pluginSearchDirs: false,
 };
