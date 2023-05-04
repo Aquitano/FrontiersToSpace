@@ -39,13 +39,14 @@ const sizes = "(min-width: 640px) 49vw, 57vw";
         alt="A spaceship embarking on a journey to space"
       />
     </div>
-    <!-- center horintantal -->
     <div
-      class="absolute bottom-2 left-1/2 z-50 h-12 w-12 -translate-x-1/2 transform pb-4"
+      class="absolute bottom-2 left-1/2 z-50 hidden h-12 w-12 -translate-x-1/2 transform md:block"
       id="scroll-down"
     >
-      <Icon name="mdi:arrow-down-circle-outline" />
-      <div class="scroll-to-icon"></div>
+      <!-- <Icon name="mdi:arrow-down-circle-outline" /> -->
+      <btn class="scroll-to toggle animate">
+        <div class="scroll-to-icon fill-slate-200"></div>
+      </btn>
     </div>
   </div>
 
@@ -56,38 +57,98 @@ const sizes = "(min-width: 640px) 49vw, 57vw";
       }
     </style>
   </noscript>
-
-  <style>
-    @keyframes float {
-      0% {
-        transform: translate3d(0, 0, 0);
-      }
-
-      100% {
-        transform: translate3d(0, 30px, 0);
-      }
-    }
-
-    #spaceship {
-      animation: float linear 2.5s infinite alternate;
-      filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      #spaceship {
-        @apply animate-none;
-      }
-
-      :global(#starfield) {
-        @apply hidden;
-      }
-
-      #splash-bg-fallback {
-        @apply block;
-      }
-    }
-  </style>
 </section>
+
+<style lang="scss">
+  @keyframes float {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+      transform: translate3d(0, 30px, 0);
+    }
+  }
+
+  #spaceship {
+    animation: float linear 2.5s infinite alternate;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #spaceship {
+      @apply animate-none;
+    }
+
+    :global(#starfield) {
+      @apply hidden;
+    }
+
+    #splash-bg-fallback {
+      @apply block;
+    }
+  }
+
+  /* Scroll Down Animation */
+  #scroll-down btn.toggle:active .scroll-to-icon {
+    box-shadow: inset 0 0 0 2px #d7dde7;
+  }
+  #scroll-down btn.toggle:active .scroll-to-icon:after {
+    background: #878a8f;
+  }
+  #scroll-down .scroll-to-icon {
+    width: 30px;
+    height: 40px;
+    box-shadow: inset 0 0 0 2px #d7dde7;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out 0s;
+    transform: translateY(0);
+  }
+  #scroll-down .scroll-to-icon:after {
+    content: "";
+    width: 5px;
+    height: 9px;
+    background: #d7dde7;
+    margin-left: 12.25px;
+    top: 8px;
+    border-radius: 2px;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-name: scroll;
+    position: absolute;
+  }
+  #scroll-down.keep-arrow btn.toggle {
+    visibility: visible;
+  }
+
+  @media (min-width: 1280px) {
+    #scroll-down btn.toggle {
+      margin-top: 30px;
+    }
+    #scroll-down btn.toggle:hover svg path {
+      fill: #ffffff;
+    }
+    #scroll-down btn.toggle:hover .scroll-to-icon {
+      box-shadow: inset 0 0 0 2px #ffffff;
+    }
+    #scroll-down btn.toggle:hover .scroll-to-icon:after {
+      background: #ffffff;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    50% {
+      opacity: 1;
+      transform: translateY(7px);
+    }
+  }
+</style>
 
 <script>
   document.querySelector("#scroll-down")?.addEventListener("click", () => {
