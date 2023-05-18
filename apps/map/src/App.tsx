@@ -4,19 +4,8 @@ import 'leaflet.offline';
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import { useMap } from './hooks';
+import { repeaters } from './repeaters.js';
 import { storageLayer } from './storageLayer.js';
-
-const markers = [
-    {
-        name: 'DB0BW',
-        qth: 'Passau',
-        output: '438.67500',
-        input: '431.07500',
-        description: 'Tonruf 1750 Hz oder Subton 71,9 Hz',
-        lat: 48.553953,
-        lng: 13.345679,
-    },
-];
 
 const App = () => {
     const { position } = useMap();
@@ -120,31 +109,55 @@ const App = () => {
                 <Marker position={position}>
                     <Popup>Eigener Standort</Popup>
                 </Marker>
-                {markers.map((marker) => (
-                    <Marker position={[marker.lat, marker.lng]}>
+                {repeaters.map((marker) => (
+                    <Marker position={[marker[0].lat, marker[0].lng]}>
                         <Popup>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>Rufzeichen</td>
-                                        <td>{marker.name}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>QTH</td>
-                                        <td>{marker.qth}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ausgabe/Eingabe</td>
-                                        <td>
-                                            {marker.output} / {marker.input}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bemerkung</td>
-                                        <td>{marker.description}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            {marker.map((element, index) => (
+                                // if index === 0 then detais are open
+                                // else details are closed
+                                <details open={index === 0}>
+                                    <summary>{element.name}</summary>
+
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>Call</td>
+                                                <td>{element.name}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Position</td>
+                                                <td>{element.qth}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ausgabe / Eingabe</td>
+                                                <td>
+                                                    {element.output} /{' '}
+                                                    {element.input}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Offset</td>
+                                                <td>
+                                                    {Number.parseFloat(
+                                                        element.output,
+                                                    ) -
+                                                        Number.parseFloat(
+                                                            element.input,
+                                                        )}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mode</td>
+                                                <td>{element.mode}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bemerkung</td>
+                                                <td>{element.description}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </details>
+                            ))}
                         </Popup>
                     </Marker>
                 ))}
