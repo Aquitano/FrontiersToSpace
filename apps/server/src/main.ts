@@ -2,7 +2,7 @@ import { initTRPC } from '@trpc/server';
 import { ensureDir, pathExists, readJson, writeJson } from 'fs-extra';
 import { z } from 'zod';
 
-const apiKey = '183142.WS3stZ5a1uTri';
+const apiKey = process.env.APRS_API_KEY;
 const key = 'DL7HMX-15';
 
 const locationSchema = z.object({
