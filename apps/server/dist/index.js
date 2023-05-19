@@ -29,10 +29,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const trpcExpress = __importStar(require("@trpc/server/adapters/express"));
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
+const helmet_1 = __importDefault(require("helmet"));
 const main_1 = require("./src/main");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 const port = 8080;
+app.use((0, helmet_1.default)());
 app.use('/trpc', trpcExpress.createExpressMiddleware({
     router: main_1.appRouter,
     createContext() {
