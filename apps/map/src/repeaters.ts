@@ -147,8 +147,8 @@ export const repeaters = [
       input: '430.76250',
       description: '',
       mode: 'DStar',
-      lat: 0,
-      lng: 0,
+      lat: 48.22833,
+      lng: 12.71049,
     },
     {
       name: 'DB0XTK',
@@ -157,8 +157,8 @@ export const repeaters = [
       input: '430.76250',
       description: 'DMR ID: 262117 - DMR-BM',
       mode: 'DMR',
-      lat: 0,
-      lng: 0,
+      lat: 48.22833,
+      lng: 12.71049,
     },
     {
       name: 'DB0XTK',
@@ -167,8 +167,8 @@ export const repeaters = [
       input: '430.76250',
       description: '',
       mode: 'C4FM',
-      lat: 0,
-      lng: 0,
+      lat: 48.22833,
+      lng: 12.71049,
     },
   ],
   [

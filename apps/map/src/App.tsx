@@ -2,10 +2,13 @@
 import L, { Control } from 'leaflet';
 import 'leaflet.offline';
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup } from 'react-leaflet';
 import { useMap } from './hooks';
 import { repeaters } from './repeaters.js';
 import { storageLayer } from './storageLayer.js';
+
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 const App = () => {
   const { position } = useMap();
@@ -15,6 +18,13 @@ const App = () => {
 
   useEffect(() => {
     if (map) {
+      const DefaultIcon = L.icon({
+        iconUrl: icon,
+        shadowUrl: iconShadow,
+      });
+
+      L.Marker.prototype.options.icon = DefaultIcon;
+
       const tileLayerOffline = L.tileLayer.offline(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
@@ -99,11 +109,6 @@ const App = () => {
         ref={setMap}
         style={{ minHeight: '100vh', minWidth: '100vw', zIndex: 0 }}
       >
-        <TileLayer
-          // @ts-expect-error
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
         <Marker position={position}>
           <Popup>Eigener Standort</Popup>
         </Marker>
