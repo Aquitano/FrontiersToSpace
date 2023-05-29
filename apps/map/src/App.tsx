@@ -7,9 +7,6 @@ import { useMap } from './hooks';
 import { repeaters } from './repeaters.js';
 import { storageLayer } from './storageLayer.js';
 
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
 const App = () => {
   const { position } = useMap();
   const [map, setMap] = useState(null);
@@ -18,13 +15,6 @@ const App = () => {
 
   useEffect(() => {
     if (map) {
-      const DefaultIcon = L.icon({
-        iconUrl: icon,
-        shadowUrl: iconShadow,
-      });
-
-      L.Marker.prototype.options.icon = DefaultIcon;
-
       const tileLayerOffline = L.tileLayer.offline(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
