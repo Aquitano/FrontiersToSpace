@@ -20,7 +20,7 @@ const App = () => {
 				{
 					attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 					subdomains: 'abc',
-					minZoom: 8,
+					minZoom: 7,
 					maxZoom: 10,
 				},
 			);
