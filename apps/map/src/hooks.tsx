@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export const useMap = () => {
@@ -6,6 +5,20 @@ export const useMap = () => {
 		lat: 48.5688531,
 		lng: 13.4345537,
 	});
+
+	const fetchLocation = async () => {
+		const axios = (await import('axios')).default;
+		try {
+			const { data } = await axios.get('http://ip-api.com/json');
+			setPosition({
+				lat: data.lat,
+				lng: data.lon,
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(
 			({ coords }) => {
@@ -13,18 +26,7 @@ export const useMap = () => {
 			},
 			(blocked) => {
 				if (blocked) {
-					const fetch = async () => {
-						try {
-							const { data } = await axios.get('https://ipapi.co/json');
-							setPosition({
-								lat: data.latitude,
-								lng: data.longitude,
-							});
-						} catch (err) {
-							console.error(err);
-						}
-					};
-					fetch();
+					fetchLocation();
 				}
 			},
 		);

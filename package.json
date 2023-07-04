@@ -7,11 +7,11 @@
 		"format": "turbo run format"
 	},
 	"devDependencies": {
-		"eslint": "^8.42.0",
+		"eslint": "^8.44.0",
 		"eslint-config-prettier": "^8.8.0",
-		"eslint-config-turbo": "^1.10.1",
+		"eslint-config-turbo": "^1.10.7",
 		"prettier": "^2.8.8",
-		"turbo": "^1.10.1"
+		"turbo": "^1.10.7"
 	},
 	"packageManager": "pnpm@7.15.0",
 	"name": "AtmosphereX"

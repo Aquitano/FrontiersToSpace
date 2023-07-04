@@ -1,18 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import L, { Control } from 'leaflet';
 import 'leaflet.offline';
+import { block } from 'million/react';
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import { useMap } from './hooks';
 import { repeaters } from './repeaters.js';
 import { storageLayer } from './storageLayer.js';
 
-const App = () => {
-	const { position } = useMap();
-	const [map, setMap] = useState(null);
-	const [progress, setProgress] = useState(0);
-	const [total, setTotal] = useState(0);
+interface TileEvent {
+	_tilesforSave: string[];
+}
 
+const useTileLayerOffline = (
+	map: L.Map | null,
+	setProgress: (progress: number) => void,
+	setTotal: (total: number) => void,
+) => {
 	useEffect(() => {
 		if (map) {
 			const tileLayerOffline = L.tileLayer.offline(
@@ -29,13 +33,9 @@ const App = () => {
 
 			const controlSaveTiles = L.control.savetiles(tileLayerOffline, {
 				zoomlevels: [8, 9, 10],
-				confirm(
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					layer: { _tilesforSave: string | any[] },
-					succescallback: () => void,
-				) {
+				confirm(layer: TileEvent, successCallback: () => void) {
 					if (window.confirm(`Save ${layer._tilesforSave.length}`)) {
-						succescallback();
+						successCallback();
 					}
 				},
 				confirmRemoval(successCallback: () => void) {
@@ -49,46 +49,40 @@ const App = () => {
 
 			controlSaveTiles.addTo(map);
 
-			const layerswitcher = new Control.Layers(
+			const layerSwitcher = new Control.Layers(
 				{
 					'osm (offline)': tileLayerOffline,
 				},
 				null,
 				{ collapsed: false },
 			).addTo(map);
-			// add storage overlay
-			storageLayer(tileLayerOffline, layerswitcher);
 
-			let locProgress: number;
-			tileLayerOffline.on(
-				'savestart',
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				(e: { _tilesforSave: string | any[] }) => {
-					locProgress = 0;
-					setTotal(e._tilesforSave.length);
-				},
-			);
+			storageLayer(tileLayerOffline, layerSwitcher);
+
+			let locProgress = 0;
+			tileLayerOffline.on('savestart', (e: TileEvent) => {
+				locProgress = 0;
+				setTotal(e._tilesforSave.length);
+			});
 			tileLayerOffline.on('savetileend', () => {
 				locProgress += 1;
 				setProgress(locProgress);
 			});
 		}
-	}, [map]);
+	}, [map, setProgress, setTotal]);
+};
+
+const App = block(() => {
+	const { position } = useMap();
+	const [map, setMap] = useState(null);
+	const [progress, setProgress] = useState(0);
+	const [total, setTotal] = useState(0);
+
+	useTileLayerOffline(map, setProgress, setTotal);
 
 	return (
 		<>
-			<p
-				style={{
-					zIndex: 100,
-					position: 'fixed',
-					top: 'auto',
-					bottom: 0,
-					left: 0,
-					right: 'auto',
-					color: 'red',
-					backgroundColor: 'white',
-				}}
-			>
+			<p className="download-progress">
 				Downloaded: {progress} of {total}
 			</p>
 			<MapContainer
@@ -103,12 +97,10 @@ const App = () => {
 					<Popup>Eigener Standort</Popup>
 				</Marker>
 				{repeaters.map((marker) => (
-					<Marker position={[marker[0].lat, marker[0].lng]}>
+					<Marker position={[marker[0].lat, marker[0].lng]} key={marker[0].name}>
 						<Popup>
 							{marker.map((element, index) => (
-								// if index === 0 then detais are open
-								// else details are closed
-								<details open={index === 0}>
+								<details open={index === 0} key={element.name + index}>
 									<summary>{element.name}</summary>
 
 									<table>
@@ -151,6 +143,6 @@ const App = () => {
 			</MapContainer>
 		</>
 	);
-};
+});
 
 export default App;

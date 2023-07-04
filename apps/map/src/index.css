@@ -67,3 +67,14 @@ button:focus-visible {
 		background-color: #f9f9f9;
 	}
 }
+
+.download-progress {
+	z-index: 100;
+	position: fixed;
+	top: auto;
+	bottom: 0;
+	left: 0;
+	right: auto;
+	color: red;
+	background-color: white;
+}
