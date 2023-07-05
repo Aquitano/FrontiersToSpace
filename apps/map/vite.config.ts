@@ -7,6 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
 	plugins: [
 		million.vite(),
+		// @ts-expect-error
 		{ ...react(), enforce: 'default' },
 		VitePWA({
 			registerType: 'autoUpdate',

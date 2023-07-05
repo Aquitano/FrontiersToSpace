@@ -8,11 +8,17 @@ const navItems: Array<NavItem> = [
   { title: "Karte", url: "/dashboard" },
   { title: "Aktuelles", url: "/blog" },
 ];
+
+export interface Props {
+  fixed?: boolean;
+}
+
+const { fixed } = Astro.props;
 ---
 
 <header
   id="page-header"
-  class="absolute bottom-0 z-20 flex w-full items-center justify-between border-b border-transparent px-8 py-4 text-white"
+  class="absolute bottom-0 z-20 flex w-full items-center justify-between border-b border-transparent bg-slate-400 px-8 py-4 font-bold text-black"
 >
   <a class="flex items-center gap-3 hover:!text-default" href="#">
     <h1>Frontiers To Space</h1>
@@ -77,6 +83,14 @@ const navItems: Array<NavItem> = [
   </div>
 </header>
 
+<noscript>
+  <style>
+    #open-nav-button {
+      display: none;
+    }
+  </style>
+</noscript>
+
 <script>
   import MicroModal from "micromodal";
 
@@ -105,11 +119,6 @@ const navItems: Array<NavItem> = [
   openNavButton.addEventListener("click", openMenu);
   closeNavButton.addEventListener("click", closeMenu);
 
-  document.addEventListener("scroll", () => {
-    const d = page.clientHeight - page.scrollTop - header.offsetHeight;
-    header.classList.toggle("fixed-header", d < 0);
-  });
-
   menu.addEventListener("click", (event) => {
     if ((event.target as HTMLElement).tagName === "A") {
       closeMenu();
@@ -117,13 +126,18 @@ const navItems: Array<NavItem> = [
   });
 </script>
 
-<noscript>
-  <style>
-    #open-nav-button {
-      display: none;
-    }
-  </style>
-</noscript>
+<script define:vars={{ fixed }}>
+const header = document.querySelector("#page-header");
+
+if (fixed) {
+  header.classList.add("fixed-header");
+} else {
+  document.addEventListener("scroll", () => {
+    const d = page.clientHeight - page.scrollTop - header.offsetHeight;
+    header.classList.toggle("fixed-header", d < 0);
+  });
+}
+</script>
 
 <style>
   .fixed-header {

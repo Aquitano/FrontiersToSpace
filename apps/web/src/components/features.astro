@@ -22,24 +22,6 @@ const features: Array<FeatureItem> = [
       "Der BME280 ist ein kleiner Sensor, der Druck, Luftfeuchtigkeit und Temperatur misst. Der MQ131 hingegen ist ein Sensor, der die Luftqualität überprüft, indem er Ozon erkennt.",
     icon: "mdi:tape-measure",
   },
-  // {
-  //   title: "Broad Integration",
-  //   description:
-  //     "Astro supports TypeScript, Scoped CSS, CSS Modules, Sass, Tailwind, Markdown, MDX, and any of your favorite npm packages.",
-  //   icon: "mdi:graph",
-  // },
-  // {
-  //   title: "SEO Enabled",
-  //   description:
-  //     "Automatic sitemaps, RSS feeds, pagination and collections take the pain out of SEO and syndication.",
-  //   icon: "mdi:search-web",
-  // },
-  // {
-  //   title: "Community",
-  //   description:
-  //     "Astro is an open source project powered by hundreds of contributors making thousands of individual contributions.",
-  //   icon: "mdi:account-group",
-  // },
 ];
 ---
 
@@ -52,12 +34,12 @@ const features: Array<FeatureItem> = [
     <ul class="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {
         features.map(({ title, description, icon }) => (
-          <li class="border-default bg-offset flex flex-col items-center gap-4 border p-6">
+          <li class="flex flex-col items-center gap-4 border border-default bg-offset p-6">
             <div class="h-16 w-16 rounded-full border-2 border-current p-3">
               <Icon name={icon} />
             </div>
-            <p class="text-center text-xl font-extrabold">{title}</p>
-            <p class="text-offset text-center text-sm">{description}</p>
+            <p class="text-center font-extrabold text-xl">{title}</p>
+            <p class="text-center text-offset text-sm">{description}</p>
           </li>
         ))
       }
