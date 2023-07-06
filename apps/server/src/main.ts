@@ -1,6 +1,12 @@
+import { PrismaClient } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { initTRPC } from '@trpc/server';
-import { ensureDir, pathExists, readJson, writeJson } from 'fs-extra';
 import { z } from 'zod';
+
+const prisma = new PrismaClient();
+prisma.$on('beforeExit', async () => {
+	await prisma.$disconnect();
+});
 
 const apiKey = process.env.APRS_API_KEY;
 const key = 'DL7HMX-15';
@@ -15,10 +21,10 @@ const locationSchema = z.object({
 			class: z.literal('a'),
 			name: z.literal(key),
 			type: z.literal('w'),
-			time: z.string().transform((str) => new Date(Number(str) * 1000)),
+			time: z.number().transform((str) => new Date(Number(str) * 1000)),
 			lasttime: z.string().transform((str) => new Date(Number(str) * 1000)),
-			lat: z.string().transform((str) => Number(str)),
-			lng: z.string().transform((str) => Number(str)),
+			lat: z.number(),
+			lng: z.number(),
 			//course: z.string().transform((str) => Number(str)),
 			//speed: z.string().transform((str) => Number(str)),
 			symbol: z.string(),
@@ -47,80 +53,122 @@ const weatherSchema = z.object({
 });
 type WeatherSchema = z.infer<typeof weatherSchema>;
 
-async function doesLogExist(
-	type: string,
-	data: LocationSchema['entries'][0] | WeatherSchema['entries'][0],
-) {
-	const path = `./logs/${type}/${data.time.getTime()}.json`;
-
-	if (await pathExists(path)) {
-		console.log(`Log for ${data.time} at ${path} already exists`);
-		return true;
-	}
-}
-
 async function writeLog(type: string, data: LocationSchema | WeatherSchema) {
-	if (data.entries.length !== 1) {
-		console.log('Multiple entries found');
-	}
-	ensureDir('./logs/location');
-	ensureDir('./logs/weather');
+	console.log(`Writing ${type} to database`);
+	await Promise.all(
+		data.entries.map(async (entry) => {
+			try {
+				if (type === 'location') {
+					const parsed = entry as LocationSchema['entries'][0];
 
-	data.entries.forEach(async (entry) => {
-		if (type === 'location') {
-			const parsed = data as LocationSchema;
+					const existingLocation = await prisma.location.findFirst({
+						where: { lasttime: parsed.lasttime },
+					});
 
-			const path = `./logs/location/${parsed.entries[0].time.getTime()}.json`;
+					if (!existingLocation) {
+						console.log(parsed.lasttime);
+						await prisma.location.create({
+							data: {
+								name: parsed.name,
+								type: parsed.type,
+								time: parsed.time,
+								lasttime: parsed.lasttime,
+								lat: parsed.lat,
+								lng: parsed.lng,
+								symbol: parsed.symbol,
+								srccall: parsed.srccall,
+								dstcall: parsed.dstcall,
+								comment: parsed.comment,
+								path: parsed.path,
+							},
+						});
+						console.log(`Wrote location from ${parsed.time} to database`);
+					}
+				} else if (type === 'weather') {
+					const parsed = entry as WeatherSchema['entries'][0];
 
-			if (!(await doesLogExist(type, entry))) {
-				await writeJson(path, parsed);
-				await writeJson('./logs/location/latest.json', parsed);
-				console.log(`Wrote location to ${path}`);
+					const existingWeather = await prisma.weather.findFirst({
+						where: { time: parsed.time },
+					});
+
+					if (!existingWeather) {
+						await prisma.weather.create({
+							data: {
+								name: parsed.name,
+								time: parsed.time,
+								temp: parsed.temp,
+								humidity: parsed.humidity,
+							},
+						});
+						console.log(`Wrote weather from ${parsed.time} to database`);
+					}
+				} else {
+					console.log('Invalid entry' + JSON.stringify(entry));
+				}
+			} catch (err) {
+				if (err instanceof PrismaClientKnownRequestError && err.code === 'P2002') {
+					console.log(`Record with time ${entry.time} already exists`);
+				} else {
+					console.error(err);
+				}
 			}
-		} else if (type === 'weather') {
-			const parsed = data as WeatherSchema;
-
-			const path = `./logs/weather/${parsed.entries[0].time.getTime()}.json`;
-
-			if (!(await doesLogExist(type, entry))) {
-				await writeJson(path, parsed);
-				await writeJson('./logs/weather/latest.json', parsed);
-				console.log(`Wrote weather from ${parsed.entries[0].time} to ${path}`);
-			}
-		} else {
-			console.log('Invalid entry' + entry);
-		}
-	});
+		}),
+	);
 }
 
 export async function getLocations() {
-	const data = await fetch(
-		`https://api.aprs.fi/api/get?name=${key}&what=loc&apikey=${apiKey}&format=json`,
-	).then((res) => res.json());
+	try {
+		const response = await fetch(
+			`https://api.aprs.fi/api/get?name=${key}&what=loc&apikey=${apiKey}&format=json`,
+		);
 
-	const parsedData = locationSchema.safeParse(data);
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
 
-	if (parsedData.success) {
-		console.log('Getting locations');
-		writeLog('location', parsedData.data);
-		return parsedData.data;
+		const data = await response.json();
+
+		const parsedData = locationSchema.safeParse(data);
+
+		if (parsedData.success) {
+			console.log('Getting locations');
+			await writeLog('location', parsedData.data);
+			return parsedData.data;
+		} else {
+			console.error('Data validation failed:', parsedData.error);
+		}
+	} catch (error) {
+		console.error('Failed to fetch locations:', error);
 	}
 
 	return null;
 }
 
 export async function getWeather() {
-	const data = await fetch(
-		`https://api.aprs.fi/api/get?name=${key}&what=wx&apikey=${apiKey}&format=json`,
-	).then((res) => res.json());
+	try {
+		const response = await fetch(
+			`https://api.aprs.fi/api/get?name=${key}&what=wx&apikey=${apiKey}&format=json`,
+		);
 
-	const parsedData = weatherSchema.safeParse(data);
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
 
-	if (parsedData.success) {
-		console.log('Getting weather');
-		writeLog('weather', parsedData.data);
-		return parsedData.data;
+		const data = await response.json();
+
+		const parsedData = weatherSchema.safeParse(data);
+
+		if (parsedData.success) {
+			console.log('Getting weather');
+			await writeLog('weather', parsedData.data);
+			return parsedData.data;
+		} else {
+			console.error('Data validation failed:', parsedData.error);
+		}
+	} catch (error) {
+		console.error('Failed to fetch weather:', error);
 	}
+
 	return null;
 }
 
@@ -134,10 +182,14 @@ const router = t.router;
  * @param type The type of log to get
  */
 async function getNewestLog(type: string) {
-	const path = `./logs/${type}/latest.json`;
-
-	if (await pathExists(path)) {
-		return await readJson(path);
+	if (type === 'location') {
+		return await prisma.location.findFirst({
+			orderBy: { time: 'desc' },
+		});
+	} else if (type === 'weather') {
+		return await prisma.weather.findFirst({
+			orderBy: { time: 'desc' },
+		});
 	}
 	return null;
 }
@@ -149,10 +201,16 @@ async function getNewestLog(type: string) {
 export const appRouter = router({
 	hello: t.procedure.query(() => 'Hello world!'),
 	getLocation: t.procedure.query(async () => {
-		return getNewestLog('location');
+		return getNewestLog('location') as unknown as Promise<LocationSchema['entries'][number]>;
 	}),
 	getWeather: t.procedure.query(async () => {
-		return getNewestLog('weather');
+		return getNewestLog('weather') as unknown as Promise<WeatherSchema['entries'][number]>;
+	}),
+	getLocations: t.procedure.query(async () => {
+		return await prisma.location.findMany();
+	}),
+	getWeathers: t.procedure.query(async () => {
+		return await prisma.weather.findMany();
 	}),
 });
 

@@ -10,14 +10,22 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: "https://astro-moon-landing.netlify.app/",
-  integrations: [sitemap(), tailwind(), critters(), image({
-    serviceEntryPoint: "@astrojs/image/sharp"
-  }), compress({
-    img: false
-  }), react()],
+  integrations: [
+    sitemap(),
+    tailwind(),
+    critters(),
+    image({
+      serviceEntryPoint: "@astrojs/image/sharp",
+    }),
+    compress({
+      img: false,
+    }),
+    react(),
+  ],
   vite: {
     ssr: {
-      external: ["svgo"]
-    }
-  }
+      external: ["svgo"],
+      optimizeDeps: { include: ["leaflet"] },
+    },
+  },
 });

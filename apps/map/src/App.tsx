@@ -19,6 +19,7 @@ const useTileLayerOffline = (
 ) => {
 	useEffect(() => {
 		if (map) {
+			// @ts-ignore
 			const tileLayerOffline = L.tileLayer.offline(
 				'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 				{
@@ -31,6 +32,7 @@ const useTileLayerOffline = (
 
 			tileLayerOffline.addTo(map);
 
+			// @ts-ignore
 			const controlSaveTiles = L.control.savetiles(tileLayerOffline, {
 				zoomlevels: [8, 9, 10],
 				confirm(layer: TileEvent, successCallback: () => void) {
@@ -53,7 +55,7 @@ const useTileLayerOffline = (
 				{
 					'osm (offline)': tileLayerOffline,
 				},
-				null,
+				undefined,
 				{ collapsed: false },
 			).addTo(map);
 
@@ -86,10 +88,10 @@ const App = block(() => {
 				Downloaded: {progress} of {total}
 			</p>
 			<MapContainer
-				// @ts-expect-error
 				center={position}
 				zoom={8}
 				scrollWheelZoom={true}
+				// @ts-ignore
 				ref={setMap}
 				style={{ minHeight: '100vh', minWidth: '100vw', zIndex: 0 }}
 			>

@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Location {
+  id       Int      @id @default(autoincrement())
+  name     String
+  type     String
+  time     DateTime
+  lasttime DateTime @unique
+  lat      Float
+  lng      Float
+  symbol   String
+  srccall  String
+  dstcall  String
+  comment  String
+  path     String
+}
+
+model Weather {
+  id       Int      @id @default(autoincrement())
+  name     String
+  time     DateTime @unique
+  temp     String
+  humidity String
+}
