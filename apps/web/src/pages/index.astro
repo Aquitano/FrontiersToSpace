@@ -1,11 +1,9 @@
 ---
 import "@fontsource/inter/variable.css";
-// import Compatibility from "~/components/compatibility.astro";
 import Features from "~/components/features.astro";
 import Footer from "~/components/footer.astro";
 import Header from "~/components/header.astro";
 import Intro from "~/components/intro.astro";
-// import Showcase from "~/components/showcase.astro";
 import Splash from "~/components/splash.astro";
 import "~/styles/index.css";
 
@@ -30,7 +28,7 @@ const description =
     <meta property="og:title" content="ASG Stratosphärenmission" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <!-- <meta property="og:image" content={image} /> -->
     <meta property="og:url" content={site} />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -66,8 +64,6 @@ const description =
     <div class="space-y-24 px-8 py-32">
       <Intro />
       <Features />
-      <!-- <Compatibility /> -->
-      <!-- <Showcase /> -->
     </div>
     <Footer />
   </body>
