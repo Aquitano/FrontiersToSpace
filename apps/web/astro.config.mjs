@@ -9,18 +9,18 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-moon-landing.netlify.app/",
+  site: "https://space.thomasbreindl.me",
   integrations: [
+    react(),
     sitemap(),
     tailwind(),
-    critters(),
+    // critters(),
     image({
       serviceEntryPoint: "@astrojs/image/sharp",
     }),
     compress({
       img: false,
     }),
-    react(),
   ],
   vite: {
     ssr: {

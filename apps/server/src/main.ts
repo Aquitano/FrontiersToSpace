@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { initTRPC } from '@trpc/server';
 import { z } from 'zod';
+import { InputSchema } from '../index';
 
 const prisma = new PrismaClient();
 prisma.$on('beforeExit', async () => {
@@ -37,6 +38,18 @@ const locationSchema = z.object({
 });
 type LocationSchema = z.infer<typeof locationSchema>;
 
+const locationDBSchema = z.object({
+	lasttime: z.string().transform((str) => new Date(Number(str) * 1000)),
+	lat: z.number(),
+	lng: z.number(),
+
+	comment: z.string().optional(),
+	path: z.string().optional(),
+
+	count: z.number().optional(),
+});
+type LocationDBSchema = z.infer<typeof locationDBSchema>;
+
 const weatherSchema = z.object({
 	command: z.literal('get'),
 	result: z.literal('ok'),
@@ -53,6 +66,20 @@ const weatherSchema = z.object({
 });
 type WeatherSchema = z.infer<typeof weatherSchema>;
 
+const weatherDBSchema = z.object({
+	time: z.string().transform((str) => new Date(Number(str) * 1000)),
+	temp: z.number(),
+	humidity: z.number(),
+
+	pressure: z.number().optional(),
+	ozone_ppb: z.number().optional(),
+	ozone_ppm: z.number().optional(),
+	altitude: z.number().optional(),
+	altitudeMax: z.number().optional(),
+	count: z.number().optional(),
+});
+type WeatherDBSchema = z.infer<typeof weatherDBSchema>;
+
 async function writeLog(type: string, data: LocationSchema | WeatherSchema) {
 	console.log(`Writing ${type} to database`);
 	await Promise.all(
@@ -66,18 +93,11 @@ async function writeLog(type: string, data: LocationSchema | WeatherSchema) {
 					});
 
 					if (!existingLocation) {
-						console.log(parsed.lasttime);
 						await prisma.location.create({
 							data: {
-								name: parsed.name,
-								type: parsed.type,
-								time: parsed.time,
 								lasttime: parsed.lasttime,
 								lat: parsed.lat,
 								lng: parsed.lng,
-								symbol: parsed.symbol,
-								srccall: parsed.srccall,
-								dstcall: parsed.dstcall,
 								comment: parsed.comment,
 								path: parsed.path,
 							},
@@ -94,10 +114,9 @@ async function writeLog(type: string, data: LocationSchema | WeatherSchema) {
 					if (!existingWeather) {
 						await prisma.weather.create({
 							data: {
-								name: parsed.name,
 								time: parsed.time,
-								temp: parsed.temp,
-								humidity: parsed.humidity,
+								temp: Number(parsed.temp),
+								humidity: Number(parsed.humidity),
 							},
 						});
 						console.log(`Wrote weather from ${parsed.time} to database`);
@@ -172,6 +191,61 @@ export async function getWeather() {
 	return null;
 }
 
+export async function writeFullLogs(input: InputSchema) {
+	const location: LocationDBSchema = {
+		lasttime: new Date(),
+		lat: input.lat,
+		lng: input.lon,
+		count: Number(input.count),
+	};
+
+	// Check if the location is already in the database (same timestamp or same count)
+	const existingLocation = await prisma.location.findFirst({
+		where: {
+			OR: [
+				{ lasttime: location.lasttime },
+				{ count: location.count, lasttime: { gt: new Date(Date.now() - 1000 * 60 * 60) } },
+			],
+		},
+	});
+
+	if (!existingLocation) {
+		await prisma.location.create({
+			data: location,
+		});
+		console.log(`Wrote location from ${location.lasttime} to database`);
+	}
+
+	const weather: WeatherDBSchema = {
+		time: new Date(),
+		temp: Number(input.temp),
+		altitude: Number(input.alt),
+		altitudeMax: Number(input.alt_max),
+		humidity: Number(input.humi),
+		pressure: Number(input.pres),
+		ozone_ppb: Number(input.ozone_ppb),
+		ozone_ppm: Number(input.ozone_ppm),
+		count: Number(input.count),
+	};
+
+	// Check if the weather is already in the database (same timestamp or same count)
+	const existingWeather = await prisma.weather.findFirst({
+		where: {
+			OR: [
+				{ time: weather.time },
+				{ count: weather.count, time: { gt: new Date(Date.now() - 1000 * 60 * 60) } },
+			],
+		},
+	});
+
+	if (!existingWeather) {
+		await prisma.weather.create({
+			data: weather,
+		});
+		console.log(`Wrote weather from ${weather.time} to database`);
+	}
+}
+
 /* API-ENDPOINTS */
 const t = initTRPC.create();
 const router = t.router;
@@ -184,7 +258,7 @@ const router = t.router;
 async function getNewestLog(type: string) {
 	if (type === 'location') {
 		return await prisma.location.findFirst({
-			orderBy: { time: 'desc' },
+			orderBy: { lasttime: 'desc' },
 		});
 	} else if (type === 'weather') {
 		return await prisma.weather.findFirst({
@@ -201,16 +275,16 @@ async function getNewestLog(type: string) {
 export const appRouter = router({
 	hello: t.procedure.query(() => 'Hello world!'),
 	getLocation: t.procedure.query(async () => {
-		return getNewestLog('location') as unknown as Promise<LocationSchema['entries'][number]>;
+		return getNewestLog('location') as unknown as Promise<LocationDBSchema>;
 	}),
 	getWeather: t.procedure.query(async () => {
-		return getNewestLog('weather') as unknown as Promise<WeatherSchema['entries'][number]>;
+		return getNewestLog('weather') as unknown as Promise<WeatherDBSchema>;
 	}),
 	getLocations: t.procedure.query(async () => {
-		return await prisma.location.findMany();
+		return await prisma.location.findMany({ orderBy: { lasttime: 'desc' } });
 	}),
 	getWeathers: t.procedure.query(async () => {
-		return await prisma.weather.findMany();
+		return await prisma.weather.findMany({ orderBy: { time: 'desc' } });
 	}),
 });
 

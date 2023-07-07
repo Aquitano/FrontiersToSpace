@@ -10,7 +10,7 @@ const MapWrapper = () => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "http://localhost:8080/trpc",
+          url: "http://165.232.118.212:8080/trpc",
         }),
       ],
     })

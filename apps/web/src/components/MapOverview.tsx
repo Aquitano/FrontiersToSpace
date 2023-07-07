@@ -15,7 +15,13 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Polyline,
+  Popup,
+  TileLayer,
+} from "react-leaflet";
 import { trpc } from "../utils/trpc";
 
 /**
@@ -31,7 +37,7 @@ ChartJS.register(
   Legend
 );
 
-const options = {
+const optionsTL = {
   responsive: true,
   plugins: {
     tooltip: {
@@ -42,9 +48,9 @@ const options = {
         }) {
           const label = context.dataset.label || "";
           const value = context.parsed.y;
-          if (label === "Temperature") {
+          if (label === "Temperatur") {
             return `${label}: ${value}°C`;
-          } else if (label === "Humidity") {
+          } else if (label === "Luftfeuchtigkeit") {
             return `${label}: ${value}%`;
           }
           return `${label}: ${value}`;
@@ -71,17 +77,101 @@ const options = {
   },
 };
 
+const optionsPA = {
+  responsive: true,
+  plugins: {
+    tooltip: {
+      callbacks: {
+        label: function (context: {
+          dataset: { label: string };
+          parsed: { y: any };
+        }) {
+          const label = context.dataset.label || "";
+          const value = context.parsed.y;
+          if (label === "Pressure") {
+            return `${label}: ${value} hPa`;
+          } else if (label === "Altitude") {
+            return `${label}: ${value} m`;
+          }
+          return `${label}: ${value}`;
+        },
+      },
+    },
+    legend: {
+      labels: {
+        color: "white",
+      },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "white",
+      },
+    },
+    pressure: {
+      type: "linear",
+      display: true,
+      position: "left",
+      ticks: {
+        color: "white",
+        callback: function (value, index, values) {
+          return `${value} hPa`;
+        },
+      },
+    },
+    altitude: {
+      type: "linear",
+      display: true,
+      position: "right",
+      ticks: {
+        color: "white",
+        callback: function (value, index, values) {
+          return `${value} m`;
+        },
+      },
+      // grid line settings
+      grid: {
+        drawOnChartArea: false, // only want the grid lines for one axis to show up
+      },
+    },
+  },
+};
+
+type ChartData = {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    fill: boolean;
+    backgroundColor: string;
+    borderColor: string;
+  }[];
+};
+
 const MapMain = () => {
   // @ts-ignore
   const { data } = trpc.getLocation.useQuery(undefined, {
     refetchInterval: 5000,
   });
-  const { data: weatherData } = trpc.getWeathers.useQuery(undefined);
+  // @ts-ignore
+  const { data: weatherData } = trpc.getWeathers.useQuery();
+  // @ts-ignore
   const { data: recentWeatherData } = trpc.getWeather.useQuery(undefined, {
     refetchInterval: 5000,
   });
-  const [chartData, setChartData] = useState({});
-  const [showChart, setShowChart] = useState(false);
+  const { data: locations, refetch: refetchLocations } =
+    // @ts-ignore
+    trpc.getLocations.useQuery(undefined);
+
+  // Chart data for temperature and humidity
+  const [chartDataTL, setChartDataTL] = useState<ChartData | {}>({});
+  const [showChartTL, setShowChartTL] = useState(false);
+
+  // Chart data for pressure and altitude
+  const [chartDataPA, setChartDataPA] = useState<ChartData | {}>({});
+  const [showChartPA, setShowChartPA] = useState(false);
+
   const [location, setLocation] = useState<[number, number]>([0, 0]);
   const map = useRef<L.Map>(null);
 
@@ -98,18 +188,18 @@ const MapMain = () => {
       const temps = weatherData.map((entry) => entry.temp);
       const humidity = weatherData.map((entry) => entry.humidity);
 
-      setChartData({
+      setChartDataTL({
         labels: times,
         datasets: [
           {
-            label: "Temperatur",
+            label: "Temperatur (°C)",
             data: temps,
             fill: false,
             backgroundColor: "rgb(75, 192, 192)",
             borderColor: "rgba(75, 192, 192, 0.2)",
           },
           {
-            label: "Luftfeuchtigkeit",
+            label: "Luftfeuchtigkeit (%)",
             data: humidity,
             fill: false,
             backgroundColor: "rgb(255, 99, 132)",
@@ -117,26 +207,64 @@ const MapMain = () => {
           },
         ],
       });
-      setShowChart(true);
+      setShowChartTL(true);
     }
   }, [weatherData]);
 
   /**
-   * Effect to update location when data changes.
+   * Effect to update chart data for pressure and altitude when weather data changes.
    */
   useEffect(() => {
-    if (data) {
-      setLocation([data.lat, data.lng]);
-      if (map.current) map.current.setView([data.lat, data.lng], 10);
+    if (weatherData) {
+      const pressureData = weatherData
+        .map((entry) => ({
+          time: entry.time,
+          pressure: entry.pressure,
+          altitude: entry.altitude,
+        }))
+        .filter((entry) => entry.pressure !== null && entry.altitude !== null);
+
+      const times = pressureData.map((entry) => {
+        const date = new Date(entry.time);
+        return `${date.getHours()}:${date.getMinutes()}`;
+      });
+
+      const pressures = pressureData.map((entry) => entry.pressure);
+      const altitudes = pressureData.map((entry) => entry.altitude);
+
+      if (pressures.length > 0 && altitudes.length > 0) {
+        setChartDataPA({
+          labels: times,
+          datasets: [
+            {
+              label: "Luftdruck (hPa)",
+              data: pressures,
+              yAxisID: "pressure",
+              fill: false,
+              backgroundColor: "rgb(75, 192, 192)",
+              borderColor: "rgba(75, 192, 192, 0.2)",
+            },
+            {
+              label: "Höhe (m)",
+              data: altitudes,
+              yAxisID: "altitude",
+              fill: false,
+              backgroundColor: "rgb(255, 99, 132)",
+              borderColor: "rgba(255, 99, 132, 0.2)",
+            },
+          ],
+        });
+        setShowChartPA(true);
+      }
     }
-  }, [data]);
+  }, [weatherData]);
 
   /**
    * Effect to update chart data when recent weather data changes.
    */
   useEffect(() => {
     if (recentWeatherData) {
-      setChartData((prevData) => {
+      setChartDataTL((prevData: ChartData) => {
         const newTime = new Date(recentWeatherData.time);
         const newTimeFormatted = `${newTime.getHours()}:${newTime.getMinutes()}`;
         const newTemp = recentWeatherData.temp;
@@ -157,15 +285,59 @@ const MapMain = () => {
           ],
         };
       });
+
+      if (
+        recentWeatherData.pressure !== null &&
+        recentWeatherData.altitude !== null
+      ) {
+        setChartDataPA((prevData: ChartData) => {
+          const newTime = new Date(recentWeatherData.time);
+          const newTimeFormatted = `${newTime.getHours()}:${newTime.getMinutes()}`;
+          const newPressure = recentWeatherData.pressure;
+          const newAltitude = recentWeatherData.altitude;
+
+          return {
+            ...prevData,
+            labels: [...prevData.labels, newTimeFormatted],
+            datasets: [
+              {
+                ...prevData.datasets[0],
+                data: [...prevData.datasets[0].data, newPressure],
+              },
+              {
+                ...prevData.datasets[1],
+                data: [...prevData.datasets[1].data, newAltitude],
+              },
+            ],
+          };
+        });
+      }
     }
   }, [recentWeatherData]);
 
+  /**
+   * Effect to update location when data changes.
+   */
+  useEffect(() => {
+    if (data) {
+      setLocation([data.lat, data.lng]);
+      if (map.current) map.current.setView([data.lat, data.lng], 10);
+      void refetchLocations();
+    }
+  }, [data]);
+
   return (
     <div>
-      {showChart && (
+      {showChartTL && (
         <div className="absolute left-0 top-0 z-10 h-1/3 w-1/3 bg-slate-900">
           {/* @ts-ignore */}
-          <Line data={chartData} options={options} />
+          <Line data={chartDataTL} options={optionsTL} />
+        </div>
+      )}
+      {showChartPA && (
+        <div className="absolute right-0 top-0 z-10 h-1/3 w-1/3 bg-slate-900">
+          {/* @ts-ignore */}
+          <Line data={chartDataPA} options={optionsPA} />
         </div>
       )}
       {/* <p>{JSON.stringify(data)}</p> */}
@@ -180,6 +352,7 @@ const MapMain = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {locations && <Polyline positions={locations} />}
         <Marker
           position={location}
           icon={L.icon({

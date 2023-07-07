@@ -13,23 +13,25 @@ datasource db {
 
 model Location {
   id       Int      @id @default(autoincrement())
-  name     String
-  type     String
-  time     DateTime
   lasttime DateTime @unique
   lat      Float
   lng      Float
-  symbol   String
-  srccall  String
-  dstcall  String
-  comment  String
-  path     String
+  comment  String?
+  path     String?
+
+  count Int?
 }
 
 model Weather {
   id       Int      @id @default(autoincrement())
-  name     String
   time     DateTime @unique
-  temp     String
-  humidity String
+  temp     Float
+  humidity Float
+
+  altitude    Float?
+  altitudeMax Float?
+  pressure    Float?
+  ozone_ppb   Float?
+  ozone_ppm   Float?
+  count       Int?
 }

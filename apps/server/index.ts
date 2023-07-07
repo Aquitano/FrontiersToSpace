@@ -1,14 +1,45 @@
 import * as trpcExpress from '@trpc/server/adapters/express';
 import cors from 'cors';
-import express from 'express';
+import express, { type Request, type Response } from 'express';
 import helmet from 'helmet';
+import { z } from 'zod';
 import { appRouter, getLocations, getWeather } from './src/main';
+
+const PostInputSchema = z.object({
+	call: z.string(),
+	lat: z.number(),
+	lon: z.number(),
+	alt: z.number(),
+	temp: z.string(),
+	humi: z.string(),
+	pres: z.string(),
+	alt_max: z.string(),
+	count: z.string(),
+	rate: z.string(),
+	ozone_ppb: z.string(),
+	ozone_ppm: z.string(),
+});
+export type InputSchema = z.infer<typeof PostInputSchema>;
 
 const app = express();
 app.use(cors());
 const port = 8080;
 
 app.use(helmet());
+
+app.post('/', (req: Request, res: Response) => {
+	try {
+		// Validate the data against the schema
+		const data = PostInputSchema.parse(req.body);
+
+		// Process the data...
+		console.log(data);
+
+		res.status(200).send('Data received');
+	} catch (error) {
+		res.status(400).send('Invalid data');
+	}
+});
 
 app.use(
 	'/trpc',
