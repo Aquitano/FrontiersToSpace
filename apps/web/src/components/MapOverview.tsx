@@ -18,6 +18,9 @@ import { Line } from "react-chartjs-2";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { trpc } from "../utils/trpc";
 
+/**
+ * Register the necessary ChartJS components.
+ */
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -27,6 +30,46 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const options = {
+  responsive: true,
+  plugins: {
+    tooltip: {
+      callbacks: {
+        label: function (context: {
+          dataset: { label: string };
+          parsed: { y: any };
+        }) {
+          const label = context.dataset.label || "";
+          const value = context.parsed.y;
+          if (label === "Temperature") {
+            return `${label}: ${value}°C`;
+          } else if (label === "Humidity") {
+            return `${label}: ${value}%`;
+          }
+          return `${label}: ${value}`;
+        },
+      },
+    },
+    legend: {
+      labels: {
+        color: "white",
+      },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "white",
+      },
+    },
+    y: {
+      ticks: {
+        color: "white",
+      },
+    },
+  },
+};
 
 const MapMain = () => {
   // @ts-ignore
@@ -42,46 +85,9 @@ const MapMain = () => {
   const [location, setLocation] = useState<[number, number]>([0, 0]);
   const map = useRef<L.Map>(null);
 
-  const options = {
-    responsive: true,
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: function (context: {
-            dataset: { label: string };
-            parsed: { y: any };
-          }) {
-            const label = context.dataset.label || "";
-            const value = context.parsed.y;
-            if (label === "Temperature") {
-              return `${label}: ${value}°C`;
-            } else if (label === "Humidity") {
-              return `${label}: ${value}%`;
-            }
-            return `${label}: ${value}`;
-          },
-        },
-      },
-      legend: {
-        labels: {
-          color: "white",
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: "white",
-        },
-      },
-      y: {
-        ticks: {
-          color: "white",
-        },
-      },
-    },
-  };
-
+  /**
+   * Effect to update chart data when weather data changes.
+   */
   useEffect(() => {
     if (weatherData) {
       console.log(weatherData);
@@ -115,6 +121,9 @@ const MapMain = () => {
     }
   }, [weatherData]);
 
+  /**
+   * Effect to update location when data changes.
+   */
   useEffect(() => {
     if (data) {
       setLocation([data.lat, data.lng]);
@@ -122,6 +131,9 @@ const MapMain = () => {
     }
   }, [data]);
 
+  /**
+   * Effect to update chart data when recent weather data changes.
+   */
   useEffect(() => {
     if (recentWeatherData) {
       setChartData((prevData) => {

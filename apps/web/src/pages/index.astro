@@ -12,7 +12,7 @@ import "~/styles/index.css";
 const { generator, site } = Astro;
 const image = new URL("social.jpg", site);
 const description =
-  "Entdecke die Stratosphäre, einfacher. 'Frontiers to Space' ist ein innovatives Schülerprojekt, das Wissenschaft verbindet. Rasante Datenerfassung trifft auf inspirierende Lernmomente.";
+  "Entdecke die Stratosphäre, einfacher. 'ASG Stratosphärenmission' ist ein innovatives Schülerprojekt, das Wissenschaft verbindet. Rasante Datenerfassung trifft auf inspirierende Lernmomente.";
 ---
 
 <!DOCTYPE html>
@@ -23,11 +23,11 @@ const description =
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={generator} />
 
-    <title>Frontiers To Space</title>
+    <title>ASG Stratosphärenmission</title>
     <meta name="description" content={description} />
 
     <!-- social media -->
-    <meta property="og:title" content="Frontiers To Space" />
+    <meta property="og:title" content="ASG Stratosphärenmission" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
@@ -59,7 +59,7 @@ const description =
     </script>
   </head>
   <body
-    class="bg-default text-default selection:bg-secondary h-full overflow-x-hidden text-base selection:text-white"
+    class="h-full overflow-x-hidden bg-default text-default text-base selection:bg-secondary selection:text-white"
   >
     <Header />
     <Splash />
