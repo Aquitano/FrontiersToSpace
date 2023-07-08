@@ -1,55 +1,41 @@
 #!/usr/bin/env python3
 
 import datetime
-import pprint
+import json
 import os
 import sys
 import signal
 import traceback
-import requests
+from datetime import datetime
 
 import aprslib
 
 # https://aprs-python.readthedocs.io/en/latest/
 
-
-# watchlist = ["dd1rk", "do3rt"]
-watchlist = ["dl7hmx-15"]
-
-
 def callback(packet):
+    raw = packet[1]  # The raw packet data is now the second element of the input
+    date = packet[0]  # The date is the first element of the input
 
-    if not packet["from"].lower().startswith(tuple(watchlist)):
-        return
-        # pass
+    info = aprslib.parse(raw)
 
-    now = datetime.datetime.now()
-    now = now.strftime("%Y-%m-%d %H:%M:%S")
-    raw = packet["raw"]
-
-    call = packet["from"]
-    # print("recv ", call)
-
-    lat = packet.get("latitude", 0)
-    lon = packet.get("longitude", 0)
-    cmt = packet.get("comment", "")
-
-    # "DD1RK-11>APRS,qAO,DL0POR-10:!/6!M.QoUUOv3H.../...t074h53b09787/A=001305 Am=001485 Ct=d Zr=0.70 F O3b=54.31 O3m=-0.99"
-
-    pkt = packet["raw"]
-    # pkt = pkt.replace(".../...g", "g")
-
-    info = aprslib.parse(pkt)
-    pprint.pprint(info)
-
+    lat = info.get("latitude", 0)
+    lon = info.get("longitude", 0)
+    cmt = info.get("comment", "")
+    call = info.get("from", "")
     alt = info.get("altitude", 0)
+    speed = info.get("speed", 0)
 
     _, info = aprslib.parsing.weather.parse_weather_data(cmt)
-    pprint.pprint(info)
 
     temp = info.get("temperature", "")
     humi = info.get("humidity", "")
     pres = info.get("pressure", "")
+
+    ozone_ppb = ""
+    ozone_ppm = ""
+    alt_max = ""
+    count = ""
+    rate = ""
 
     try:
         parts = cmt.split(" ")
@@ -72,10 +58,8 @@ def callback(packet):
         ozone_ppb = ""
         ozone_ppm = ""
 
-    print(call, lat, lon, alt, temp, humi, pres)
-    print("")
-
     data = {
+        "date": date,
         "call": call,
         "lat": lat,
         "lon": lon,
@@ -86,31 +70,34 @@ def callback(packet):
         "alt_max": alt_max,
         "count": count,
         "rate": rate,
-        "ozone_ppb": ozone_ppb,
-        "ozone_ppm": ozone_ppm
+        "speed": speed,
     }
 
-    response = requests.post("http://localhost:8080", json=data)
-    if response.status_code != 200:
-        print(f"Failed to send data to server: {response.text}")
+    # check if ozone data is available
+    if (ozone_ppb != "" and ozone_ppm != ""):
+        data["ozone_ppb"] = ozone_ppb
+        data["ozone_ppm"] = ozone_ppm
 
+    return data
 
 def excepthook(exc_typ, exc_val, tb):
     traceback.print_exception(exc_val)
     traceback.print_tb(tb)
     os.kill(os.getpid(), signal.SIGKILL)
 
-
 if __name__ == "__main__":
     sys.excepthook = excepthook
-    # raise Exception("foo")
 
-    ais = aprslib.IS("N0CALL")
-    ais.connect()
+    parsed_data = []
 
-    print("connected")
-    try:
-        # ais.consumer(callback, raw=True)
-        ais.consumer(callback)
-    except KeyboardInterrupt:
-        pass
+    raw_data_list = []
+
+    for raw in raw_data_list:
+        try:
+            data = callback(raw)
+            parsed_data.append(data)
+        except KeyboardInterrupt:
+            pass
+
+    with open("output_file" + str(datetime.now()) + ".json", 'w') as f:
+        json.dump(parsed_data, f, indent=4, ensure_ascii=False)
