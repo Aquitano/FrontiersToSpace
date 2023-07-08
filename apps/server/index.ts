@@ -3,7 +3,7 @@ import cors from 'cors';
 import express, { type Request, type Response } from 'express';
 import helmet from 'helmet';
 import { z } from 'zod';
-import { appRouter, getLocations, getWeather } from './src/main';
+import { appRouter, getLocations, getWeather, writeFullLogs } from './src/main';
 
 const PostInputSchema = z.object({
 	call: z.string(),
@@ -32,8 +32,8 @@ app.post('/', (req: Request, res: Response) => {
 		// Validate the data against the schema
 		const data = PostInputSchema.parse(req.body);
 
-		// Process the data...
-		console.log(data);
+		// Process the data
+		writeFullLogs(data);
 
 		res.status(200).send('Data received');
 	} catch (error) {
@@ -56,7 +56,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-	console.log(`api-server listening at http://localhost:${port}`);
+	console.log(`api-server listening at http://165.232.118.212:${port}`);
 
 	const queryData = setInterval(async () => {
 		await getLocations();

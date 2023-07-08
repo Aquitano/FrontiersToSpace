@@ -90,7 +90,7 @@ def callback(packet):
         "ozone_ppm": ozone_ppm
     }
 
-    response = requests.post("http://localhost:3000", json=data)
+    response = requests.post("http://localhost:8080", json=data)
     if response.status_code != 200:
         print(f"Failed to send data to server: {response.text}")
 

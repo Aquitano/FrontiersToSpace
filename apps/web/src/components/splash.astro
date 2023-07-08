@@ -16,8 +16,9 @@ const sizes = "(min-width: 640px) 49vw, 57vw";
     <h2
       class="flex flex-col gap-2 self-end sm:gap-4 sm:self-auto sm:justify-self-end"
     >
+      <!-- If the screen is smaller, the text should change ocordingly, not to become unreadable -->
       <div
-        class="gradient-text z-50 pb-12 text-center font-extrabold tracking-tighter text-8xl md:pr-10"
+        class="gradient-text z-40 max-w-fit pb-12 text-center font-extrabold tracking-tighter text-3xl sm:text-4xl md:text-4xl lg:pr-10 lg:text-8xl"
       >
         ASG<br />Stratosphären- <br />mission
       </div>
@@ -36,7 +37,7 @@ const sizes = "(min-width: 640px) 49vw, 57vw";
       />
     </div>
     <div
-      class="absolute bottom-2 left-1/2 z-50 hidden h-12 w-12 -translate-x-1/2 transform md:block"
+      class="absolute bottom-2 left-1/2 z-40 hidden h-12 w-12 -translate-x-1/2 transform md:block"
       id="scroll-down"
     >
       <!-- <Icon name="mdi:arrow-down-circle-outline" /> -->
