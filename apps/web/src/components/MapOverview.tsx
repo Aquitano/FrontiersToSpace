@@ -8,6 +8,7 @@ import {
 	Title,
 	Tooltip,
 } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import L from 'leaflet';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -23,7 +24,16 @@ import { inputData, type StratosphereData } from '../utils/data';
 /**
  * Register the necessary ChartJS components.
  */
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+	CategoryScale,
+	LinearScale,
+	PointElement,
+	LineElement,
+	Title,
+	Tooltip,
+	Legend,
+	annotationPlugin,
+);
 
 const optionsTL = {
 	responsive: true,
@@ -45,6 +55,23 @@ const optionsTL = {
 		legend: {
 			labels: {
 				color: 'white',
+			},
+		},
+		annotation: {
+			annotations: {
+				line1: {
+					type: 'line',
+					xMin: '14:20',
+					xMax: '14:20',
+					borderColor: 'rgba(155, 99, 32, 0.3)',
+					borderWidth: 2,
+					label: {
+						backgroundColor: 'rgba(155, 99, 32, 0.3)',
+						content: 'Ballon geplatzt',
+						display: true,
+						yAdjust: -75,
+					},
+				},
 			},
 		},
 	},
@@ -99,6 +126,23 @@ const optionsPA = {
 		legend: {
 			labels: {
 				color: 'white',
+			},
+		},
+		annotation: {
+			annotations: {
+				line1: {
+					type: 'line',
+					xMin: '14:20',
+					xMax: '14:20',
+					borderColor: 'rgba(155, 99, 32, 0.3)',
+					borderWidth: 2,
+					label: {
+						backgroundColor: 'rgba(155, 99, 32, 0.3)',
+						content: 'Ballon geplatzt',
+						display: true,
+						xAdjust: -30,
+					},
+				},
 			},
 		},
 	},
@@ -170,15 +214,12 @@ const MapMain = () => {
 	 */
 	useEffect(() => {
 		if (data) {
-			console.log(data);
 			const times = data.map((entry) => {
 				const date = new Date(entry.date * 1000);
 				return `${date.getHours()}:${date.getMinutes()}`;
 			});
 			const temps = data.map((entry) => entry.tmp.toFixed(2));
 			const humidity = data.map((entry) => entry.hum);
-
-			console.log(times);
 
 			setChartDataTL({
 				labels: times,
@@ -190,7 +231,7 @@ const MapMain = () => {
 						backgroundColor: 'rgb(75, 192, 192)',
 						borderColor: 'rgba(75, 192, 192, 0.5)',
 						tension: 1,
-						pointRadius: 0.3,
+						pointRadius: 0.4,
 						yAxisID: 'temp',
 					},
 					{
@@ -200,7 +241,7 @@ const MapMain = () => {
 						backgroundColor: 'rgb(255, 99, 132)',
 						borderColor: 'rgba(255, 99, 132, 0.5)',
 						tension: 1,
-						pointRadius: 0.3,
+						pointRadius: 0.4,
 						yAxisID: 'hum',
 					},
 				],
@@ -242,7 +283,7 @@ const MapMain = () => {
 							backgroundColor: 'rgb(75, 192, 192)',
 							borderColor: 'rgba(75, 192, 192, 0.5)',
 							tension: 1,
-							pointRadius: 0.3,
+							pointRadius: 0.4,
 						},
 						{
 							label: 'Höhe (m)',
@@ -252,10 +293,9 @@ const MapMain = () => {
 							backgroundColor: 'rgb(255, 99, 132)',
 							borderColor: 'rgba(255, 99, 132, 0.5)',
 							tension: 1,
-							pointRadius: 0.3,
+							pointRadius: 0.4,
 						},
 					],
-					cubicInterpolationMode: 'monotone',
 				});
 				setShowChartPA(true);
 			}
@@ -280,9 +320,10 @@ const MapMain = () => {
 			{showChartTL && (
 				<div
 					className={`absolute left-0 top-0 ${
-						isTLFullScreen ? 'z-50 h-screen w-screen' : 'z-10 h-1/3 w-1/3'
+						isTLFullScreen ? 'z-50 h-full w-full' : 'z-10 w-full md:w-1/3'
 					} bg-slate-900`}
 				>
+					{/* ... */}
 					{/* Text and icon on same line */}
 					<button onClick={() => setIsTLFullScreen(!isTLFullScreen)} className="flex items-center">
 						<img
@@ -302,7 +343,7 @@ const MapMain = () => {
 			{showChartPA && (
 				<div
 					className={`absolute right-0 top-0 ${
-						isPAFullScreen ? 'z-50 h-screen w-screen' : 'z-10 h-1/3 w-1/3'
+						isPAFullScreen ? 'z-50 h-full w-full' : 'z-10 w-full md:w-1/3'
 					} bg-slate-900`}
 				>
 					<button onClick={() => setIsPAFullScreen(!isPAFullScreen)} className="flex items-center">
@@ -347,9 +388,6 @@ const MapMain = () => {
 						Derzeitige Position: <br /> {location[0].toFixed(3)}, {location[1].toFixed(3)}
 					</Popup>
 				</Marker>
-
-				{/* 		"lat": 48.606306736741516,
-		"lon": 12.907682857037855, */}
 				<Marker
 					position={[48.606306736741516, 12.907682857037855]}
 					icon={L.icon({
@@ -360,7 +398,7 @@ const MapMain = () => {
 					})}
 				>
 					<Popup>
-						Ballon ist geplatzt: <br /> 48.606306736741516, 12.907682857037855
+						Ballon ist geplatzt: <br /> 48.6063067, 12.9076828 <br /> 14:20
 					</Popup>
 				</Marker>
 			</MapContainer>

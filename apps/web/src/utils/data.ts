@@ -11,7 +11,6 @@ export type StratosphereData = {
 	count: number;
 	rate: number;
 };
-
 export const inputData: StratosphereData[] = [
 	{
 		date: 1688803252,
@@ -2587,19 +2586,19 @@ export const inputData: StratosphereData[] = [
 		count: 228,
 		rate: 3.58,
 	},
-	{
-		date: 1688812333,
-		via: 'DG1MSR-10',
-		lat: 48.51869129437213,
-		lon: 14.167644109354569,
-		alt: 20757.794400000002,
-		alt_max: 20757.794400000002,
-		tmp: -26.11111111111111,
-		hum: 11,
-		pss: 56.2,
-		count: 220,
-		rate: 0.34,
-	},
+	// {
+	// 	date: 1688812333,
+	// 	via: 'DG1MSR-10',
+	// 	lat: 48.51869129437213,
+	// 	lon: 14.167644109354569,
+	// 	alt: 20757.794400000002,
+	// 	alt_max: 20757.794400000002,
+	// 	tmp: -26.11111111111111,
+	// 	hum: 11,
+	// 	pss: 56.2,
+	// 	count: 220,
+	// 	rate: 0.34,
+	// },
 	{
 		date: 1688812342,
 		via: 'DO5MKK-15',
