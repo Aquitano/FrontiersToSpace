@@ -323,8 +323,6 @@ const MapMain = () => {
 						isTLFullScreen ? 'z-50 h-full w-full' : 'z-10 w-full md:w-1/3'
 					} bg-slate-900`}
 				>
-					{/* ... */}
-					{/* Text and icon on same line */}
 					<button onClick={() => setIsTLFullScreen(!isTLFullScreen)} className="flex items-center">
 						<img
 							src={fullscreenIcon.src}
@@ -334,7 +332,7 @@ const MapMain = () => {
 							className="invert"
 						/>
 						{/* @ts-ignore */}
-						Vergrößern
+						{isTLFullScreen ? 'Verkleinern' : 'Vergrößern'}
 					</button>
 					{/* @ts-ignore */}
 					<Line data={chartDataTL} options={optionsTL} />
@@ -354,7 +352,7 @@ const MapMain = () => {
 							alt="Toggle Full Screen"
 							className="invert"
 						/>
-						Vergrößern
+						{isPAFullScreen ? 'Verkleinern' : 'Vergrößern'}
 					</button>
 					{/* @ts-ignore */}
 					<Line data={chartDataPA} options={optionsPA} />
