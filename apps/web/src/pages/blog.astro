@@ -1,12 +1,12 @@
 ---
-import "@fontsource/inter/variable.css";
-import HeaderDark from "~/components/header-dark.astro";
-import "~/styles/index.css";
-import Footer from "../components/footer.astro";
-import BlogContent from "../components/blog-content.astro";
+import '@fontsource/inter/variable.css';
+import HeaderDark from '~/components/header-dark.astro';
+import '~/styles/index.css';
+import Footer from '../components/footer.astro';
+import BlogContent from '../components/blog-content.astro';
 
 const { generator, site } = Astro;
-const image = new URL("social.jpg", site);
+const image = new URL('social.jpg', site);
 const description =
     "Entdecke die Stratosphäre, einfacher. 'ASG Stratosphärenmission' ist ein innovatives Schülerprojekt, das Wissenschaft verbindet. Rasante Datenerfassung trifft auf inspirierende Lernmomente.";
 ---
@@ -32,32 +32,26 @@ const description =
 
         <!-- initialize theme -->
         <script is:inline>
-            const themeSaved = localStorage.getItem("theme");
+            const themeSaved = localStorage.getItem('theme');
 
             if (themeSaved) {
                 document.documentElement.dataset.theme = themeSaved;
             } else {
-                const prefersDark = window.matchMedia(
-                    "(prefers-color-scheme: dark)"
-                ).matches;
-                document.documentElement.dataset.theme = prefersDark
-                    ? "dark"
-                    : "light";
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.dataset.theme = prefersDark ? 'dark' : 'light';
             }
 
             window
-                .matchMedia("(prefers-color-scheme: dark)")
-                .addEventListener("change", (event) => {
-                    if (!localStorage.getItem("theme")) {
-                        document.documentElement.dataset.theme = event.matches
-                            ? "dark"
-                            : "light";
+                .matchMedia('(prefers-color-scheme: dark)')
+                .addEventListener('change', (event) => {
+                    if (!localStorage.getItem('theme')) {
+                        document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
                     }
                 });
         </script>
     </head>
     <body
-        class="h-full overflow-x-hidden bg-default text-default text-base selection:bg-secondary selection:text-white"
+        class="h-full overflow-x-hidden bg-default text-base text-default selection:bg-secondary selection:text-white"
     >
         <HeaderDark fixed={true} />
         <BlogContent />

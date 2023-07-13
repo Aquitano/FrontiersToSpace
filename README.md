@@ -1,81 +1,31 @@
-# Turborepo starter
+# ASG Stratosphärenmission 2021
+ASG Stratosphärenmission is a student-led project that aims to explore the boundaries of the sky by uniting various scientific disciplines in a spectacular stratospheric balloon expedition. This repository contains the code and resources used in the project, leveraging cutting-edge technologies to bring the wonders of the stratosphere to your fingertips.
 
-This is an official starter Turborepo.
+## Project Goal
+The project aims to capture measurements such as altitude, ozone content, temperature, and air pressure. The analyzed data enhances the understanding of the stratosphere and enriches geography lessons.
 
-## Using this example
+## Technical Details
 
-Run the following command:
+### Repository Structure
+- `apps/board`: Contains the code for the TTGO T-Beam.
+- `apps/map`: Contains the code for the interactive map for the various receiver locations. It uses React, a popular JavaScript library for building user interfaces, Leaflet for interactive maps, and million.js for efficient DOM manipulation.
+- `apps/server`: Contains the server code that records data and enables the interactive map. It's built with TypeScript for static typing, Express for handling server-side logic, tRPC for end-to-end typesafe APIs, and Zod for schema validation.
+- `apps/web`: Contains the code for the project website with a live dashboard. It uses Astro.js for fast, optimized frontend rendering, React.js for UI components, Tailwind for utility-first CSS, Leaflet for interactive maps, and Chart.js for dynamic and responsive charts.
+- `data`: Contains all recorded data in both filtered and unfiltered versions.
+### Communication Technology
+We're using APRS (Automatic Packet Reporting System), a data transmission system in amateur radio that transmits position, weather, telemetry messages. The data can be retrieved online and visualized, bringing real-time insights from the stratosphere to your screen.
 
-```sh
-npx create-turbo@latest
-```
+### Hardware
+Our hardware of choice is the TTGO T-Beam, a user-friendly board used for wireless communication. With integrated GPS and LoRa technology, it enables long-distance transmission of location data, making it a perfect fit for our stratospheric exploration.
 
-## What's inside?
+### Sensors
+We're employing the BME280, a compact yet powerful sensor that measures pressure, humidity, and temperature, and the MQ131, a specialized sensor that checks air quality by measuring the ozone content.
 
-This Turborepo includes the following packages/apps:
+## Event Details
+The project culminates in a grand event - "The Day of Science" on July 8, 2023, where the stratospheric balloon was launched. This event was a collaboration between Adalbert Stifter Gymnasium and Sternwarte Passau.
 
-### Apps and Packages
+## Collaboration
+The project is supported by the German Amateur Radio Club (DARC), which brings the necessary know-how with its experienced knowledge and experiences. This partnership offers an extended spectrum of learning and interaction on the Day of Science, bringing visitors closer to the fascination of our world.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## License
+This project is licensed under the GNU General Public License v3.0 - see the LICENSE file for details.
