@@ -160,12 +160,18 @@ importers:
       chartjs-plugin-annotation:
         specifier: ^3.0.1
         version: 3.0.1(chart.js@4.3.0)
+      chartjs-plugin-crosshair:
+        specifier: ^1.2.0
+        version: 1.2.0(chart.js@4.3.0)
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
       leaflet-defaulticon-compatibility:
         specifier: ^0.1.1
         version: 0.1.1
+      leaflet-geometryutil:
+        specifier: ^0.10.2
+        version: 0.10.2
       micromodal:
         specifier: ^0.4.10
         version: 0.4.10
@@ -3335,6 +3341,14 @@ packages:
       chart.js: 4.3.0
     dev: false
 
+  /chartjs-plugin-crosshair@1.2.0(chart.js@4.3.0):
+    resolution: {integrity: sha512-yohsbME+wT1ODBdErBzWnC6xUDcn2tLeWmGjGDTykjpiT7+FMgibffajxqaCVmdzselxNPirpt76vx33EewSSQ==}
+    peerDependencies:
+      chart.js: ^3.4.0
+    dependencies:
+      chart.js: 4.3.0
+    dev: false
+
   /chokidar@3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
@@ -5132,6 +5146,12 @@ packages:
 
   /leaflet-defaulticon-compatibility@0.1.1:
     resolution: {integrity: sha512-vDBFdlUAwjSEGep9ih8kfJilf6yN8V9zTbF5NC/1ZwLeGko3RUQepspPnGCRMFV51dY3Lb3hziboicrFz+rxQA==}
+    dev: false
+
+  /leaflet-geometryutil@0.10.2:
+    resolution: {integrity: sha512-NBKO0dW6+Ur0LKa6t5JMBd242lAMjRek23O8awlpvoDmTrb7fqgZC608YLwpZ4TYJZ/RbLu9fclIN8M4pIVwTQ==}
+    dependencies:
+      leaflet: 1.9.4
     dev: false
 
   /leaflet.offline@3.0.0:
