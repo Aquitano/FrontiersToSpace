@@ -3,59 +3,56 @@ import '@fontsource/inter/variable.css';
 import HeaderDark from '~/components/header-dark.astro';
 import '~/styles/index.css';
 import GitHubCorner from '~/components/github-corner.astro';
-import MapWrapper from '../components/MapWrapper';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import MapMain from '../components/MapOverview';
 
 const { generator, site } = Astro;
 const image = new URL('social.jpg', site);
 const description =
-    "Entdecke die Stratosphäre, einfacher. 'ASG Stratosphärenmission' ist ein innovatives Schülerprojekt, das Wissenschaft verbindet. Rasante Datenerfassung trifft auf inspirierende Lernmomente.";
+	"Entdecke die Stratosphäre, einfacher. 'ASG Stratosphärenmission' ist ein innovatives Schülerprojekt, das Wissenschaft verbindet. Rasante Datenerfassung trifft auf inspirierende Lernmomente.";
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="h-full motion-safe:scroll-smooth" data-theme="dark">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <meta name="generator" content={generator} />
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<meta name="generator" content={generator} />
 
-        <title>Dashboard - ASG Stratosphärenmission</title>
-        <meta name="description" content={description} />
+		<title>Dashboard - ASG Stratosphärenmission</title>
+		<meta name="description" content={description} />
 
-        <!-- social media -->
-        <meta property="og:title" content="ASG Stratosphärenmission" />
-        <meta property="og:type" content="website" />
-        <meta property="og:description" content={description} />
-        <!-- <meta property="og:image" content={image} /> -->
-        <meta property="og:url" content={site} />
-        <meta name="twitter:card" content="summary_large_image" />
+		<!-- social media -->
+		<meta property="og:title" content="ASG Stratosphärenmission" />
+		<meta property="og:type" content="website" />
+		<meta property="og:description" content={description} />
+		<!-- <meta property="og:image" content={image} /> -->
+		<meta property="og:url" content={site} />
+		<meta name="twitter:card" content="summary_large_image" />
 
-        <!-- initialize theme -->
-        <script is:inline>
-            const themeSaved = localStorage.getItem('theme');
+		<!-- initialize theme -->
+		<script is:inline>
+			const themeSaved = localStorage.getItem('theme');
 
-            if (themeSaved) {
-                document.documentElement.dataset.theme = themeSaved;
-            } else {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                document.documentElement.dataset.theme = prefersDark ? 'dark' : 'light';
-            }
+			if (themeSaved) {
+				document.documentElement.dataset.theme = themeSaved;
+			} else {
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				document.documentElement.dataset.theme = prefersDark ? 'dark' : 'light';
+			}
 
-            window
-                .matchMedia('(prefers-color-scheme: dark)')
-                .addEventListener('change', (event) => {
-                    if (!localStorage.getItem('theme')) {
-                        document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
-                    }
-                });
-        </script>
-    </head>
-    <body
-        class="h-full overflow-x-hidden bg-default text-base text-default selection:bg-secondary selection:text-white"
-    >
-        <HeaderDark />
-        <GitHubCorner />
-        <MapWrapper client:only />
-    </body>
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+				if (!localStorage.getItem('theme')) {
+					document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+				}
+			});
+		</script>
+	</head>
+	<body
+		class="h-full overflow-x-hidden bg-default text-base text-default selection:bg-secondary selection:text-white"
+	>
+		<HeaderDark />
+		<MapMain client:only />
+	</body>
 </html>

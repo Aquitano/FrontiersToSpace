@@ -4,6 +4,11 @@ import { useState } from 'react';
 import { trpc } from '../utils/trpc';
 import MapMain from './MapOverview';
 
+/**
+ * Wrapper for MapOverview to provide trpc and react-query
+ *
+ * @deprecated This is not used anymore, but kept for reference
+ */
 const MapWrapper = () => {
 	const [queryClient] = useState(() => new QueryClient());
 	const [trpcClient] = useState(() =>

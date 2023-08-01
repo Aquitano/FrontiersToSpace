@@ -5,9 +5,6 @@ import { z } from 'zod';
 import { InputSchema } from '../index';
 
 const prisma = new PrismaClient();
-prisma.$on('beforeExit', async () => {
-	await prisma.$disconnect();
-});
 
 const apiKey = process.env.APRS_API_KEY;
 const key = 'DL7HMX-15';

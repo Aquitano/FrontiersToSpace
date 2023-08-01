@@ -7,6 +7,7 @@ import {
 	PointElement,
 	Title,
 	Tooltip,
+	type TooltipItem,
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import { CrosshairPlugin } from 'chartjs-plugin-crosshair';
@@ -15,13 +16,17 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-geometryutil';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { MapContainer, Marker, Polyline, Popup, TileLayer } from 'react-leaflet';
 import markerIcon from '../assets/balloon.png';
 import burstIcon from '../assets/burst.png';
 import fullscreenIcon from '../assets/fullscreen.svg';
 import { inputData, type StratosphereData } from '../utils/data';
+
+// Get type of options from Line
+type optionsProps = React.ComponentProps<typeof Line>['options'];
+type dataProps = React.ComponentProps<typeof Line>['data'];
 
 /**
  * Register the necessary ChartJS components.
@@ -38,23 +43,17 @@ ChartJS.register(
 	CrosshairPlugin,
 );
 
-const optionsTL = {
+/**
+ * Base options for the chart.
+ * @constant
+ * @type {optionsProps}
+ */
+const baseOptions: optionsProps = {
 	responsive: true,
+	maintainAspectRatio: false,
 	plugins: {
 		tooltip: {
 			mode: 'index',
-			callbacks: {
-				label: function (context: { dataset: { label: string }; parsed: { y: any } }) {
-					const label = context.dataset.label || '';
-					const value = context.parsed.y;
-					if (label === 'Temperatur') {
-						return `${label}: ${value}°C`;
-					} else if (label === 'Luftfeuchtigkeit') {
-						return `${label}: ${value}%`;
-					}
-					return `${label}: ${value}`;
-				},
-			},
 			intersect: false,
 		},
 		legend: {
@@ -79,22 +78,19 @@ const optionsTL = {
 				},
 			},
 		},
+		// @ts-expect-error
 		crosshair: {
 			line: {
-				color: '#F66', // crosshair line color
-				width: 1, // crosshair line width
+				color: '#F66',
+				width: 1,
 			},
 			sync: {
-				enabled: true, // enable trace line syncing with other charts
-				group: 2, // chart group
-				suppressTooltips: false, // suppress tooltips when showing a synced tracer
+				enabled: true,
+				group: 1,
+				suppressTooltips: false,
 			},
 			zoom: {
-				enabled: true, // enable zooming
-				zoomboxBackgroundColor: 'rgba(66,133,244,0.2)', // background color of zoom box
-				zoomboxBorderColor: '#48F', // border color of zoom box
-				zoomButtonText: 'Reset Zoom', // reset zoom button text
-				zoomButtonClass: 'reset-zoom', // reset zoom button class
+				enabled: false,
 			},
 		},
 	},
@@ -104,13 +100,43 @@ const optionsTL = {
 				color: 'white',
 			},
 		},
+	},
+};
+
+/**
+ * Options for the TL chart.
+ * @constant
+ * @type {optionsProps}
+ */
+const optionsTL: optionsProps = {
+	...baseOptions,
+	plugins: {
+		...baseOptions?.plugins,
+		tooltip: {
+			...baseOptions?.plugins?.tooltip,
+			callbacks: {
+				label: function (context: TooltipItem<'line'>) {
+					const label = context.dataset.label ?? '';
+					const value = context.parsed.y;
+					if (label === 'Temperatur') {
+						return `${label}: ${value}°C`;
+					} else if (label === 'Luftfeuchtigkeit') {
+						return `${label}: ${value}%`;
+					}
+					return `${label}: ${value}`;
+				},
+			},
+		},
+	},
+	scales: {
+		...baseOptions?.scales,
 		temp: {
 			type: 'linear',
 			display: true,
 			position: 'left',
 			ticks: {
 				color: 'white',
-				callback: function (value: string) {
+				callback: function (value: string | number) {
 					return `${value}°C`;
 				},
 			},
@@ -121,7 +147,7 @@ const optionsTL = {
 			position: 'right',
 			ticks: {
 				color: 'white',
-				callback: function (value: string) {
+				callback: function (value: string | number) {
 					return `${value}%`;
 				},
 			},
@@ -129,14 +155,20 @@ const optionsTL = {
 	},
 };
 
-const optionsPA = {
-	responsive: true,
+/**
+ * Options for the PA chart.
+ * @constant
+ * @type {optionsProps}
+ */
+const optionsPA: optionsProps = {
+	...baseOptions,
 	plugins: {
+		...baseOptions?.plugins,
 		tooltip: {
-			mode: 'index',
+			...baseOptions?.plugins?.tooltip,
 			callbacks: {
-				label: function (context: { dataset: { label: string }; parsed: { y: any } }) {
-					const label = context.dataset.label || '';
+				label: function (context: TooltipItem<'line'>) {
+					const label = context.dataset.label ?? '';
 					const value = context.parsed.y;
 					if (label === 'Pressure') {
 						return `${label}: ${value} hPa`;
@@ -146,62 +178,17 @@ const optionsPA = {
 					return `${label}: ${value}`;
 				},
 			},
-			intersect: false,
-		},
-		legend: {
-			labels: {
-				color: 'white',
-			},
-		},
-		annotation: {
-			annotations: {
-				line1: {
-					type: 'line',
-					xMin: '14:20',
-					xMax: '14:20',
-					borderColor: 'rgba(155, 99, 32, 0.3)',
-					borderWidth: 2,
-					label: {
-						backgroundColor: 'rgba(155, 99, 32, 0.3)',
-						content: 'Ballon geplatzt',
-						display: true,
-						yAdjust: -40,
-					},
-				},
-			},
-		},
-		crosshair: {
-			line: {
-				color: '#F66', // crosshair line color
-				width: 1, // crosshair line width
-			},
-			sync: {
-				enabled: true, // enable trace line syncing with other charts
-				group: 1, // chart group
-				suppressTooltips: false, // suppress tooltips when showing a synced tracer
-			},
-			zoom: {
-				enabled: true, // enable zooming
-				zoomboxBackgroundColor: 'rgba(66,133,244,0.2)', // background color of zoom box
-				zoomboxBorderColor: '#48F', // border color of zoom box
-				zoomButtonText: 'Reset Zoom', // reset zoom button text
-				zoomButtonClass: 'reset-zoom', // reset zoom button class
-			},
 		},
 	},
 	scales: {
-		x: {
-			ticks: {
-				color: 'white',
-			},
-		},
+		...baseOptions?.scales,
 		pressure: {
 			type: 'linear',
 			display: true,
 			position: 'left',
 			ticks: {
 				color: 'white',
-				callback: function (value: string) {
+				callback: function (value: string | number) {
 					return `${value} hPa`;
 				},
 			},
@@ -212,29 +199,22 @@ const optionsPA = {
 			position: 'right',
 			ticks: {
 				color: 'white',
-				callback: function (value: string) {
+				callback: function (value: string | number) {
 					return `${value} m`;
 				},
 			},
-			// grid line settings
 			grid: {
-				drawOnChartArea: false, // only want the grid lines for one axis to show up
+				drawOnChartArea: false,
 			},
 		},
 	},
 };
 
-type ChartData = {
-	labels: string[];
-	datasets: {
-		label: string;
-		data: number[];
-		fill: boolean;
-		backgroundColor: string;
-		borderColor: string;
-	}[];
-};
-
+/**
+ * Initial state for the component.
+ * @constant
+ * @type {Object}
+ */
 const initialState = {
 	isTLFullScreen: false,
 	isPAFullScreen: false,
@@ -247,24 +227,40 @@ const initialState = {
 	chartDataPA: {},
 	showChartPA: false,
 	location: [0, 0],
+
+	isSmallScreen: window.innerWidth <= 768,
+	currentGraph: 'TL',
 };
 
-const MapMain = () => {
+/**
+ * Main component for displaying the map and related data.
+ * @function
+ * @returns {JSX.Element} Rendered component.
+ */
+const MapMain = (): JSX.Element => {
 	const [state, setState] = useState(initialState);
 
 	const map = useRef<L.Map>(null);
 	const polyline = useRef<L.Polyline>(null);
+	const tlGraphContainer = useRef<HTMLDivElement>(null);
+	const paGraphContainer = useRef<HTMLDivElement>(null);
 
 	const [data] = useState<StratosphereData[]>(inputData);
 
-	const toggleTLFullScreen = useCallback(() => {
+	/**
+	 * Toggles the full-screen mode for the Temperature and Humidity graph.
+	 */
+	const handleToggleTLFullScreen = useCallback(() => {
 		setState((prevState) => ({
 			...prevState,
 			isTLFullScreen: !prevState.isTLFullScreen,
 		}));
 	}, []);
 
-	const togglePAFullScreen = useCallback(() => {
+	/**
+	 * Toggles the full-screen mode for the Pressure and Altitude graph.
+	 */
+	const handleTogglePAFullScreen = useCallback(() => {
 		setState((prevState) => ({
 			...prevState,
 			isPAFullScreen: !prevState.isPAFullScreen,
@@ -272,7 +268,89 @@ const MapMain = () => {
 	}, []);
 
 	/**
-	 * Effect to update chart data when weather data changes.
+	 * Handles window resize events to update the isSmallScreen state.
+	 */
+	const handleResize = useCallback(() => {
+		setState((prevState) => ({
+			...prevState,
+			isSmallScreen: window.innerWidth < 768,
+		}));
+	}, []);
+
+	/**
+	 * Handles click events on the polyline to display a popup with relevant data.
+	 *
+	 * @param {Object} event - The click event object.
+	 */
+	const handlePolylineClick = useCallback((event: { latlng: any }) => {
+		if (!map.current) return;
+
+		const threshold = 5;
+		const clickPoint = event.latlng;
+
+		for (let i = 0; i < locations.length - 1; i++) {
+			const start = locations[i] as LatLngTuple;
+			const end = locations[i + 1] as LatLngTuple;
+			const distance = L.GeometryUtil.distanceSegment(map.current, clickPoint, start, end);
+
+			if (distance < threshold) {
+				// Retrieve the corresponding data point
+				const entry = data[i];
+
+				// Format the data for the popup
+				const time = new Date(entry.date * 1000).toLocaleTimeString('de-DE', {
+					hour: '2-digit',
+					minute: '2-digit',
+				});
+				const content = `
+					Uhrzeit: ${time}<br>
+					Ort: ${entry.lat.toFixed(4)}, ${entry.lon.toFixed(4)}<br>
+					Temperatur: ${entry.tmp.toFixed(2)} °C<br>
+					Luftfeuchtigkeit: ${entry.hum} %<br>
+					Höhe: ${entry.alt.toFixed(2)} m<br>
+					Luftdruck: ${entry.pss.toFixed(2)} hPa
+				`;
+
+				// Create a new popup at the clicked location with the formatted data
+				L.popup().setLatLng([data[i].lat, data[i].lon]).setContent(content).openOn(map.current);
+
+				break;
+			}
+		}
+	}, []);
+
+	/**
+	 * Sets the size of the container based on the full-screen state.
+	 *
+	 * @param {HTMLDivElement} container - The container element.
+	 * @param {boolean} isFullScreen - Indicates if the container should be in full-screen mode.
+	 */
+	const setContainerSize = (container: HTMLDivElement, isFullScreen: boolean) => {
+		if (isFullScreen) {
+			if (state.isSmallScreen) {
+				container.style.width = '200%';
+			} else {
+				container.style.width = '100%';
+			}
+			container.style.height = '95vh';
+		} else {
+			container.style.width = '';
+			container.style.height = '';
+		}
+	};
+
+	/**
+	 * Toggles between the Temperature and Humidity graph and the Pressure and Altitude graph on smaller screens.
+	 */
+	const toggleGraphDisplay = () => {
+		setState((prevState) => ({
+			...prevState,
+			currentGraph: prevState.currentGraph === 'TL' ? 'PA' : 'TL',
+		}));
+	};
+
+	/**
+	 * Updates the chart data for pressure and altitude based on the weather data.
 	 */
 	useEffect(() => {
 		if (data) {
@@ -319,7 +397,7 @@ const MapMain = () => {
 	}, [data]);
 
 	/**
-	 * Effect to update chart data for pressure and altitude when weather data changes.
+	 * Updates the chart data for pressure and altitude based on the weather data.
 	 */
 	useEffect(() => {
 		if (data) {
@@ -377,7 +455,7 @@ const MapMain = () => {
 	}, [data]);
 
 	/**
-	 * Effect to update location when data changes.
+	 * Updates the map location based on the latest data point.
 	 */
 	useEffect(() => {
 		if (data) {
@@ -389,94 +467,93 @@ const MapMain = () => {
 		}
 	}, [data]);
 
+	/**
+	 * Adds an event listener to handle window resize events.
+	 */
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
+	/**
+	 * Adjusts the size of the graph containers based on the full-screen state.
+	 */
+	useEffect(() => {
+		if (tlGraphContainer.current) {
+			setContainerSize(tlGraphContainer.current, state.isTLFullScreen);
+		}
+		if (paGraphContainer.current) {
+			setContainerSize(paGraphContainer.current, state.isPAFullScreen);
+		}
+	}, [state.isPAFullScreen, state.isTLFullScreen]);
+
 	const locations = data.map((entry) => [entry.lat, entry.lon]);
 	if (map.current) map.current.setView([48.56099, 13.44782], 10);
 
-	const handlePolylineClick = (event: { latlng: any }) => {
-		if (!map.current) return;
-
-		const threshold = 5;
-		const clickPoint = event.latlng;
-
-		for (let i = 0; i < locations.length - 1; i++) {
-			const start = locations[i] as LatLngTuple;
-			const end = locations[i + 1] as LatLngTuple;
-			const distance = L.GeometryUtil.distanceSegment(map.current, clickPoint, start, end);
-
-			if (distance < threshold) {
-				// Retrieve the corresponding data point
-				const entry = data[i];
-
-				// Format the data for the popup
-				const time = new Date(entry.date * 1000).toLocaleTimeString('de-DE', {
-					hour: '2-digit',
-					minute: '2-digit',
-				});
-				const content = `
-                Uhrzeit: ${time}<br>
-                Ort: ${entry.lat.toFixed(4)}, ${entry.lon.toFixed(4)}<br>
-                Temperatur: ${entry.tmp.toFixed(2)} °C<br>
-                Luftfeuchtigkeit: ${entry.hum} %<br>
-                Höhe: ${entry.alt.toFixed(2)} m<br>
-                Luftdruck: ${entry.pss.toFixed(2)} hPa
-            `;
-
-				// Create a new popup at the clicked location with the formatted data
-				L.popup().setLatLng([data[i].lat, data[i].lon]).setContent(content).openOn(map.current);
-
-				break;
-			}
-		}
-	};
-
 	return (
 		<div>
-			{state.showChartTL && (
-				<div
-					className={`absolute left-0 top-0 mr-10 overflow-hidden ${
-						state.isTLFullScreen ? 'z-50 h-full w-full' : 'z-10 w-full md:w-1/3'
-					} bg-slate-900`}
-				>
-					<button
-						onClick={toggleTLFullScreen}
-						className="absolute left-0 top-0 flex items-center text-white"
-					>
-						<img
-							src={fullscreenIcon.src}
-							width={20}
-							height={20}
-							alt="Toggle Full Screen"
-							className="invert"
-						/>
-						{state.isTLFullScreen ? 'Verkleinern' : 'Vergrößern'}
-					</button>
-					{/* @ts-ignore */}
-					<Line data={state.chartDataTL} options={optionsTL} />
-				</div>
+			{/* Button to switch between graphs on smaller screens */}
+			{state.isSmallScreen && (
+				<button onClick={toggleGraphDisplay} className="absolute right-0 top-0 z-20">
+					Switch Graph
+				</button>
 			)}
-			{state.showChartPA && (
-				<div
-					className={`absolute right-0 top-0 ml-10 overflow-hidden ${
-						state.isPAFullScreen ? 'z-50 h-full w-full' : 'z-10 w-full md:w-1/3'
-					} bg-slate-900`}
-				>
-					<button
-						onClick={togglePAFullScreen}
-						className="absolute left-0 top-0 flex items-center text-white"
+
+			{state.showChartTL &&
+				(!state.isSmallScreen || (state.isSmallScreen && state.currentGraph === 'TL')) && (
+					<div
+						className={`absolute left-0 top-0 overflow-hidden ${
+							state.isTLFullScreen
+								? 'z-50 h-screen w-screen max-md:overflow-x-scroll'
+								: 'z-10 w-full md:w-5/12 2xl:w-1/3'
+						} bg-slate-900`}
 					>
-						<img
-							src={fullscreenIcon.src}
-							width={20}
-							height={20}
-							alt="Toggle Full Screen"
-							className="invert"
-						/>
-						{state.isPAFullScreen ? 'Verkleinern' : 'Vergrößern'}
-					</button>
-					{/* @ts-ignore */}
-					<Line data={state.chartDataPA} options={optionsPA} />
-				</div>
-			)}
+						<button
+							onClick={handleToggleTLFullScreen}
+							className="left-0 top-0 flex items-center text-white xl:absolute"
+						>
+							<img
+								src={fullscreenIcon.src}
+								width={20}
+								height={20}
+								alt="Toggle Full Screen"
+								className="invert"
+							/>
+							{state.isTLFullScreen ? 'Verkleinern' : 'Vergrößern'}
+						</button>
+						<div className="h-[30vh]" ref={tlGraphContainer}>
+							<Line data={state.chartDataTL as dataProps} options={optionsTL} />
+						</div>
+					</div>
+				)}
+
+			{state.showChartPA &&
+				(!state.isSmallScreen || (state.isSmallScreen && state.currentGraph === 'PA')) && (
+					<div
+						className={`absolute right-0 top-0 ml-10 overflow-hidden ${
+							state.isPAFullScreen
+								? 'z-50 h-screen w-screen max-md:overflow-x-scroll'
+								: 'z-10 w-full md:w-5/12 2xl:w-1/3'
+						} bg-slate-900`}
+					>
+						<button
+							onClick={handleTogglePAFullScreen}
+							className="left-0 top-0 flex items-center text-white xl:absolute"
+						>
+							<img
+								src={fullscreenIcon.src}
+								width={20}
+								height={20}
+								alt="Toggle Full Screen"
+								className="invert"
+							/>
+							{state.isPAFullScreen ? 'Verkleinern' : 'Vergrößern'}
+						</button>
+						<div className="h-[30vh]" ref={paGraphContainer}>
+							<Line data={state.chartDataPA as dataProps} options={optionsPA} />
+						</div>
+					</div>
+				)}
 			<MapContainer
 				center={state.location as LatLngTuple}
 				zoom={13}
@@ -538,4 +615,4 @@ const MapMain = () => {
 	);
 };
 
-export default MapMain;
+export default memo(MapMain);
