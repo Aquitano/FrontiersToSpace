@@ -17,6 +17,5 @@
 		"husky": "^8.0.3",
 		"prettier": "^3.0.0",
 		"turbo": "^1.10.12"
-	},
-	"packageManager": "pnpm@7.15.0"
+	}
 }
