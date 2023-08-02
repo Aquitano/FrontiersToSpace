@@ -1,3 +1,3 @@
 [submodule "apps/board"]
 	path = apps/board
-	url = https://github.com/Aquitano/TTGO-T-Beam-LoRa-APRS-master.git
+	url = https://github.com/phragment/TTGO-T-Beam-LoRa-APRS/
