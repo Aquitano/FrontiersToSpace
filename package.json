@@ -9,13 +9,13 @@
 		"format": "turbo run format"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^17.6.7",
-		"@commitlint/config-conventional": "^17.6.7",
-		"eslint": "^8.46.0",
-		"eslint-config-prettier": "^8.9.0",
-		"eslint-config-turbo": "^1.10.12",
+		"@commitlint/cli": "^17.7.1",
+		"@commitlint/config-conventional": "^17.7.0",
+		"eslint": "^8.50.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-config-turbo": "^1.10.14",
 		"husky": "^8.0.3",
-		"prettier": "^3.0.0",
-		"turbo": "^1.10.12"
+		"prettier": "^3.0.3",
+		"turbo": "^1.10.14"
 	}
 }
