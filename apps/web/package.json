@@ -36,7 +36,7 @@
 		"@trpc/client": "^10.38.4",
 		"@trpc/react-query": "^10.38.4",
 		"@types/react": "^18.2.23",
-		"@types/react-dom": "^18.2.7",
+		"@types/react-dom": "^18.2.8",
 		"chart.js": "^4.4.0",
 		"chartjs-plugin-annotation": "^3.0.1",
 		"chartjs-plugin-crosshair": "^2.0.0",
