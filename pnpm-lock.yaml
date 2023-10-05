@@ -210,8 +210,8 @@ importers:
         version: 1.3.1
     devDependencies:
       '@astrojs/image':
-        specifier: ^0.17.2
-        version: 0.17.2(astro@3.1.3)(sharp@0.32.6)
+        specifier: ^0.18.0
+        version: 0.18.0(astro@3.1.3)(sharp@0.32.6)
       '@astrojs/sitemap':
         specifier: ^3.0.0
         version: 3.0.0
@@ -297,10 +297,11 @@ packages:
     resolution: {integrity: sha512-Mp+qrNhly+27bL/Zq8lGeUY+YrdoU0eDfIlAeGIPrzt0PnI/jGpvPUdCaugv4zbCrDkOUScFfcbeEiYumrdJnw==}
     dev: true
 
-  /@astrojs/image@0.17.2(astro@3.1.3)(sharp@0.32.6):
-    resolution: {integrity: sha512-hw5vGBlyPwyt9E4ux7eej7dJrcSlTAaMYKYd8OWIJVsFSbV75sXNi+5lwbpNjDLGVIS6Baa4nzayjN5Gxo73MQ==}
+  /@astrojs/image@0.18.0(astro@3.1.3)(sharp@0.32.6):
+    resolution: {integrity: sha512-IAsECAGG5s0u7KItQMVVfhU8gAkIeIlzoSga6LymLvWvTWJacjxtnRYjct5uR03kuxIYAdjZhwQowKR1bYpwDA==}
+    deprecated: '@astrojs/image is deprecated in favor of astro:assets. Please see the migration guide for more information: https://docs.astro.build/en/guides/upgrade-to/v3/\#removed-astrojsimage'
     peerDependencies:
-      astro: ^2.7.3
+      astro: ^2.10.15
       sharp: '>=0.31.0'
     peerDependenciesMeta:
       sharp:
@@ -311,7 +312,7 @@ packages:
       http-cache-semantics: 4.1.1
       image-size: 1.0.2
       kleur: 4.1.5
-      magic-string: 0.27.0
+      magic-string: 0.30.3
       mime: 3.0.0
       sharp: 0.32.6
     dev: true
@@ -5782,13 +5783,6 @@ packages:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
     dependencies:
       sourcemap-codec: 1.4.8
-    dev: true
-
-  /magic-string@0.27.0:
-    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
   /magic-string@0.30.3:
