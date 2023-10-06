@@ -13,7 +13,7 @@
 		"clean": "rimraf dist .astro node_modules"
 	},
 	"devDependencies": {
-		"@astrojs/image": "^0.17.2",
+		"@astrojs/image": "^0.18.0",
 		"@astrojs/sitemap": "^3.0.0",
 		"@astrojs/tailwind": "^5.0.0",
 		"@types/leaflet": "^1.9.6",
