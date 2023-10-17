@@ -155,8 +155,8 @@ importers:
         specifier: ^10.38.5
         version: 10.38.5
       '@trpc/react-query':
-        specifier: ^10.38.4
-        version: 10.38.4(@tanstack/react-query@4.35.3)(@trpc/client@10.38.5)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^10.40.0
+        version: 10.40.0(@tanstack/react-query@4.35.3)(@trpc/client@10.38.5)(react-dom@18.2.0)(react@18.2.0)
       '@types/react':
         specifier: ^18.2.23
         version: 18.2.23
@@ -2554,12 +2554,12 @@ packages:
       '@trpc/server': 10.38.5
     dev: false
 
-  /@trpc/react-query@10.38.4(@tanstack/react-query@4.35.3)(@trpc/client@10.38.5)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-wEreUn9E+ZMKn/oRWlhHzmSgG5SG9WpmE1F27PPjn3I0S92aYRQvVsmV43v2OAL1VUYP2aHLk7gXx2luKLLRyw==}
+  /@trpc/react-query@10.40.0(@tanstack/react-query@4.35.3)(@trpc/client@10.38.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DpJrV3lmYNo9xtPtcg49lfh9CUFap3ZivjhlSmfe4QPf7H6xBjAE+ml4OdJ0RmKvSTFvbLSOiNdB1k5O8zIdzQ==}
     peerDependencies:
       '@tanstack/react-query': ^4.18.0
-      '@trpc/client': 10.38.4
-      '@trpc/server': 10.38.4
+      '@trpc/client': 10.40.0
+      '@trpc/server': 10.40.0
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
