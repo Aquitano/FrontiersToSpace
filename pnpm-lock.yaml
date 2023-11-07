@@ -222,8 +222,8 @@ importers:
         specifier: ^1.9.6
         version: 1.9.6
       '@types/micromodal':
-        specifier: ^0.3.3
-        version: 0.3.3
+        specifier: ^0.3.5
+        version: 0.3.5
       astro:
         specifier: ^3.3.2
         version: 3.3.2(@types/node@20.5.1)(sass@1.69.3)(typescript@5.2.2)
@@ -2728,8 +2728,8 @@ packages:
       '@types/unist': 3.0.0
     dev: true
 
-  /@types/micromodal@0.3.3:
-    resolution: {integrity: sha512-XQg6nqg15A6ZKkMkDdqLkC5LTxLb7CZU6BX8uHBj4AVU7+k/W6kfriW5HCsarrjFpONNOMAmhA1ReUsMm7297g==}
+  /@types/micromodal@0.3.5:
+    resolution: {integrity: sha512-xDref7Vyx0nhfJWpeEkVrSb5l1GuHIyxfePxuHSTP3eW587Qe3hzKcBy0V+1Wjuyh21UhJH46eP43czH2ZRpGw==}
     dev: true
 
   /@types/mime@3.0.1:
