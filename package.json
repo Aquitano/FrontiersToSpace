@@ -9,7 +9,7 @@
 		"format": "turbo run format"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^17.8.0",
+		"@commitlint/cli": "^18.4.2",
 		"@commitlint/config-conventional": "^18.1.0",
 		"eslint": "^8.50.0",
 		"eslint-config-prettier": "^9.0.0",
