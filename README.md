@@ -1,4 +1,4 @@
-# ASG Stratosphärenmission 2021
+# ASG Stratosphärenmission 2023
 ASG Stratosphärenmission is a student-led project that aims to explore the boundaries of the sky by uniting various scientific disciplines in a spectacular stratospheric balloon expedition. This repository contains the code and resources used in the project, leveraging cutting-edge technologies to bring the wonders of the stratosphere to your fingertips.
 
 ## Project Goal
