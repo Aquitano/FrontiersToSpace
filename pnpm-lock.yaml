@@ -146,8 +146,8 @@ importers:
         specifier: ^3.0.9
         version: 3.0.9(@types/react-dom@18.2.13)(@types/react@18.2.56)(react-dom@18.2.0)(react@18.2.0)(vite@4.5.0)
       '@fontsource/inter':
-        specifier: ^4.5.15
-        version: 4.5.15
+        specifier: ^5.0.17
+        version: 5.0.17
       '@tanstack/react-query':
         specifier: ^4.35.3
         version: 4.35.3(react-dom@18.2.0)(react@18.2.0)
@@ -2307,8 +2307,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@fontsource/inter@4.5.15:
-    resolution: {integrity: sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==}
+  /@fontsource/inter@5.0.17:
+    resolution: {integrity: sha512-2meBGx1kt7u5LwzGc5Sz5rka6ZDrydg6nT3x6Wkt310vHXUchIywrO8pooWMzZdHYcyFY/cv4lEpJZgMD94bCg==}
     dev: false
 
   /@fortawesome/fontawesome-free@6.4.2:
