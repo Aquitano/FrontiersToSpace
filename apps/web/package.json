@@ -17,7 +17,7 @@
 		"@astrojs/sitemap": "^3.0.2",
 		"@astrojs/tailwind": "^5.0.2",
 		"@types/leaflet": "^1.9.6",
-		"@types/micromodal": "^0.3.3",
+		"@types/micromodal": "^0.3.5",
 		"astro": "^3.3.2",
 		"astro-compress": "^2.0.15",
 		"astro-critters": "^2.0.11",
