@@ -179,8 +179,8 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       leaflet-geometryutil:
-        specifier: ^0.10.2
-        version: 0.10.2
+        specifier: ^0.10.3
+        version: 0.10.3
       micromodal:
         specifier: ^0.4.10
         version: 0.4.10
@@ -6049,8 +6049,8 @@ packages:
     resolution: {integrity: sha512-IrKagWxkTwzxUkFIumy/Zmo3ksjuAu3zEadtOuJcKzuXaD76Gwvg2Z1mLyx7y52ykOzM8rAH5ChBs4DnfdGa6Q==}
     dev: false
 
-  /leaflet-geometryutil@0.10.2:
-    resolution: {integrity: sha512-NBKO0dW6+Ur0LKa6t5JMBd242lAMjRek23O8awlpvoDmTrb7fqgZC608YLwpZ4TYJZ/RbLu9fclIN8M4pIVwTQ==}
+  /leaflet-geometryutil@0.10.3:
+    resolution: {integrity: sha512-Qeas+KsnenE0Km/ydt8km3AqFe7kJhVwuLdbCYM2xe2epsxv5UFEaVJiagvP9fnxS8QvBNbm7DJlDA0tkKo9VA==}
     dependencies:
       leaflet: 1.9.4
     dev: false
