@@ -97,8 +97,8 @@ importers:
   apps/server:
     dependencies:
       '@prisma/client':
-        specifier: ^5.12.1
-        version: 5.12.1(prisma@5.4.2)
+        specifier: ^5.15.0
+        version: 5.15.0(prisma@5.4.2)
       '@trpc/server':
         specifier: ^10.40.0
         version: 10.40.0
@@ -3374,8 +3374,8 @@ packages:
       fast-glob: 3.3.2
     dev: true
 
-  /@prisma/client@5.12.1(prisma@5.4.2):
-    resolution: {integrity: sha512-6/JnizEdlSBxDIdiLbrBdMW5NqDxOmhXAJaNXiPpgzAPr/nLZResT6MMpbOHLo5yAbQ1Vv5UU8PTPRzb0WIxdA==}
+  /@prisma/client@5.15.0(prisma@5.4.2):
+    resolution: {integrity: sha512-wPTeTjbd2Q0abOeffN7zCDCbkp9C9cF+e9HPiI64lmpehyq2TepgXE+sY7FXr7Rhbb21prLMnhXX27/E11V09w==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
