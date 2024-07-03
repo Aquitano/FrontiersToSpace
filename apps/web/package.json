@@ -18,7 +18,7 @@
 		"@astrojs/tailwind": "^5.0.2",
 		"@types/leaflet": "^1.9.12",
 		"@types/micromodal": "^0.3.5",
-		"astro": "^3.3.2",
+		"astro": "^4.11.4",
 		"astro-compress": "^2.2.26",
 		"astro-critters": "^2.0.11",
 		"astro-icon": "^0.8.1",
