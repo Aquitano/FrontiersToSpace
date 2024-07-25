@@ -118,8 +118,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       zod:
-        specifier: ^3.23.0
-        version: 3.23.0
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@types/cors':
         specifier: ^2.8.15
@@ -5412,6 +5412,7 @@ packages:
 
   shikiji@0.6.10:
     resolution: {integrity: sha512-WE+A5Y2ntM5hL3iJQujk97qr5Uj7PSIRXpQfrZ6h+JWPXZ8KBEDhFXc4lqNriaRq1WGOVPUT83XMOzmHiH3W8A==}
+    deprecated: Shikiji is merged back to Shiki v1.0, please migrate over to get the latest updates
 
   side-channel@1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
@@ -6275,9 +6276,6 @@ packages:
 
   zod@3.21.1:
     resolution: {integrity: sha512-+dTu2m6gmCbO9Ahm4ZBDapx2O6ZY9QSPXst2WXjcznPMwf2YNpn3RevLx4KkZp1OPW/ouFcoBtBzFz/LeY69oA==}
-
-  zod@3.23.0:
-    resolution: {integrity: sha512-OFLT+LTocvabn6q76BTwVB0hExEBS0IduTr3cqZyMqEDbOnYmcU+y0tUAYbND4uwclpBGi4I4UUBGzylWpjLGA==}
 
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
@@ -13202,8 +13200,6 @@ snapshots:
       zod: 3.23.8
 
   zod@3.21.1: {}
-
-  zod@3.23.0: {}
 
   zod@3.23.8: {}
 
