@@ -216,8 +216,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       '@astrojs/tailwind':
-        specifier: ^5.0.2
-        version: 5.0.2(astro@3.3.2(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.75.0)(terser@5.31.0)(typescript@5.2.2))(tailwindcss@3.3.3(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)))(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2))
+        specifier: ^5.1.0
+        version: 5.1.0(astro@3.3.2(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.75.0)(terser@5.31.0)(typescript@5.2.2))(tailwindcss@3.3.3(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)))(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2))
       '@types/leaflet':
         specifier: ^1.9.12
         version: 1.9.12
@@ -331,10 +331,10 @@ packages:
   '@astrojs/sitemap@3.0.2':
     resolution: {integrity: sha512-ldxCDc0+QHcq2jH4WJFcz5iBc5/SqotEqpT91dhvoLqoRUT5U21rQ6u6qA4FyRVjpd/0Nt1kFjEsRbwoB8IKiQ==}
 
-  '@astrojs/tailwind@5.0.2':
-    resolution: {integrity: sha512-oXqeqmBlkQmsltrsU9nEWeXOtrZIAHW8dcmX7BCdrjzPnU6dPwWzAwhddNQ9ihKiWwsLnlbwQZIo2CDigcZlIA==}
+  '@astrojs/tailwind@5.1.0':
+    resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
     peerDependencies:
-      astro: ^3.2.4
+      astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
 
   '@astrojs/telemetry@3.0.3':
@@ -4157,6 +4157,10 @@ packages:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
 
+  lilconfig@3.1.2:
+    resolution: {integrity: sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow==}
+    engines: {node: '>=14'}
+
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
@@ -4900,6 +4904,18 @@ packages:
 
   postcss-load-config@4.0.1:
     resolution: {integrity: sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==}
+    engines: {node: '>= 14'}
+    peerDependencies:
+      postcss: '>=8.0.9'
+      ts-node: '>=9.0.0'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+      ts-node:
+        optional: true
+
+  postcss-load-config@4.0.2:
+    resolution: {integrity: sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==}
     engines: {node: '>= 14'}
     peerDependencies:
       postcss: '>=8.0.9'
@@ -6237,6 +6253,11 @@ packages:
     resolution: {integrity: sha512-2eHWfjaoXgTBC2jNM1LRef62VQa0umtvRiDSk6HSzW7RvS5YtkabJrwYLLEKWBc8a5U2PTSCs+dJjUTJdlHsWQ==}
     engines: {node: '>= 14'}
 
+  yaml@2.5.0:
+    resolution: {integrity: sha512-2wWLbGbYDiSqqIKoPjar3MPgB94ErzCtrNE1FdqGuaO0pi2JGjmE8aW8TDZwzU7vuxcGRdL/4gPQwQ7hD5AMSw==}
+    engines: {node: '>= 14'}
+    hasBin: true
+
   yargs-parser@20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
@@ -6385,12 +6406,12 @@ snapshots:
       sitemap: 7.1.1
       zod: 3.21.1
 
-  '@astrojs/tailwind@5.0.2(astro@3.3.2(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.75.0)(terser@5.31.0)(typescript@5.2.2))(tailwindcss@3.3.3(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)))(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2))':
+  '@astrojs/tailwind@5.1.0(astro@3.3.2(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.75.0)(terser@5.31.0)(typescript@5.2.2))(tailwindcss@3.3.3(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)))(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2))':
     dependencies:
       astro: 3.3.2(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.75.0)(terser@5.31.0)(typescript@5.2.2)
-      autoprefixer: 10.4.19(postcss@8.4.30)
-      postcss: 8.4.30
-      postcss-load-config: 4.0.1(postcss@8.4.30)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2))
+      autoprefixer: 10.4.19(postcss@8.4.38)
+      postcss: 8.4.38
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2))
       tailwindcss: 3.3.3(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2))
     transitivePeerDependencies:
       - ts-node
@@ -8753,14 +8774,14 @@ snapshots:
       postcss: 8.4.27
       postcss-value-parser: 4.2.0
 
-  autoprefixer@10.4.19(postcss@8.4.30):
+  autoprefixer@10.4.19(postcss@8.4.38):
     dependencies:
       browserslist: 4.23.1
       caniuse-lite: 1.0.30001640
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
-      postcss: 8.4.30
+      postcss: 8.4.38
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.5: {}
@@ -9116,7 +9137,7 @@ snapshots:
       dom-serializer: 2.0.0
       domhandler: 5.0.3
       htmlparser2: 8.0.2
-      postcss: 8.4.30
+      postcss: 8.4.38
       pretty-bytes: 5.6.0
 
   cross-spawn@7.0.3:
@@ -10466,6 +10487,8 @@ snapshots:
 
   lilconfig@2.1.0: {}
 
+  lilconfig@3.1.2: {}
+
   lines-and-columns@1.2.4: {}
 
   load-yaml-file@0.2.0:
@@ -11545,12 +11568,12 @@ snapshots:
       postcss: 8.4.27
       ts-node: 10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)
 
-  postcss-load-config@4.0.1(postcss@8.4.30)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)):
+  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)):
     dependencies:
-      lilconfig: 2.1.0
-      yaml: 2.3.1
+      lilconfig: 3.1.2
+      yaml: 2.5.0
     optionalDependencies:
-      postcss: 8.4.30
+      postcss: 8.4.38
       ts-node: 10.9.2(@swc/core@1.4.2)(@types/node@20.12.12)(typescript@5.2.2)
 
   postcss-nested@6.0.1(postcss@8.4.27):
@@ -12924,7 +12947,7 @@ snapshots:
   vite@4.5.0(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.75.0)(terser@5.31.0):
     dependencies:
       esbuild: 0.18.17
-      postcss: 8.4.30
+      postcss: 8.4.38
       rollup: 3.29.3
     optionalDependencies:
       '@types/node': 20.12.12
@@ -13153,6 +13176,8 @@ snapshots:
   yallist@4.0.0: {}
 
   yaml@2.3.1: {}
+
+  yaml@2.5.0: {}
 
   yargs-parser@20.2.9: {}
 
