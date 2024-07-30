@@ -152,11 +152,11 @@ importers:
         specifier: ^4.35.3
         version: 4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@trpc/client':
-        specifier: ^10.41.0
-        version: 10.41.0
+        specifier: ^10.45.2
+        version: 10.45.2
       '@trpc/react-query':
         specifier: ^10.45.1
-        version: 10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.41.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.45.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/react':
         specifier: ^18.2.56
         version: 18.2.56
@@ -2231,10 +2231,10 @@ packages:
       react-native:
         optional: true
 
-  '@trpc/client@10.41.0':
-    resolution: {integrity: sha512-W4lYULb7//2yXkULCKim49slXsBwiBq48rfge1yOWXdq0Ed8VxzXvZt8+uWOkxmHbQAw4lq8G5fCNYFB+Za6vQ==}
+  '@trpc/client@10.45.2':
+    resolution: {integrity: sha512-ykALM5kYWTLn1zYuUOZ2cPWlVfrXhc18HzBDyRhoPYN0jey4iQHEFSEowfnhg1RvYnrAVjNBgHNeSAXjrDbGwg==}
     peerDependencies:
-      '@trpc/server': 10.41.0
+      '@trpc/server': 10.45.2
 
   '@trpc/react-query@10.45.1':
     resolution: {integrity: sha512-48OOMpwVjQFUQJqlp9/tW1lqESZg9YEqB5iVci7mYaDzZPEs/YUcV85XKvYzgeW+7K9oShX/JMVce8muON/6uQ==}
@@ -8126,12 +8126,12 @@ snapshots:
     optionalDependencies:
       react-dom: 18.2.0(react@18.2.0)
 
-  '@trpc/client@10.41.0': {}
+  '@trpc/client@10.45.2': {}
 
-  '@trpc/react-query@10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.41.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@trpc/react-query@10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.45.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@tanstack/react-query': 4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@trpc/client': 10.41.0
+      '@trpc/client': 10.45.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
