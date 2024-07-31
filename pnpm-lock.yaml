@@ -243,11 +243,11 @@ importers:
         specifier: 3.0.3
         version: 3.0.3
       prettier-plugin-astro:
-        specifier: ^0.12.0
-        version: 0.12.0
+        specifier: ^0.14.1
+        version: 0.14.1
       prettier-plugin-tailwindcss:
         specifier: ^0.5.6
-        version: 0.5.6(prettier-plugin-astro@0.12.0)(prettier@3.0.3)
+        version: 0.5.6(prettier-plugin-astro@0.14.1)(prettier@3.0.3)
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -278,11 +278,11 @@ packages:
     peerDependencies:
       ajv: '>=8'
 
-  '@astrojs/compiler@1.7.0':
-    resolution: {integrity: sha512-+wXur+Nr2WyeGmccBetjUOE1P7Aut8oGzDI+wFhJ31L3Fb8/dsUCRdeVzNTFzkMI7BH5DXy+yUnDz4vudQE5JQ==}
-
   '@astrojs/compiler@2.1.0':
     resolution: {integrity: sha512-Mp+qrNhly+27bL/Zq8lGeUY+YrdoU0eDfIlAeGIPrzt0PnI/jGpvPUdCaugv4zbCrDkOUScFfcbeEiYumrdJnw==}
+
+  '@astrojs/compiler@2.10.1':
+    resolution: {integrity: sha512-XmM4j6BjvOVMag2xELq0JuG2yKOW8wgIu6dvb9BsjbGYmnvoStJn/pqEzVqc1EBszf2xYT7onIkftIOUz9AwrQ==}
 
   '@astrojs/compiler@2.8.0':
     resolution: {integrity: sha512-yrpD1WRGqsJwANaDIdtHo+YVjvIOFAjC83lu5qENIgrafwZcJgSXDuwVMXOgok4tFzpeKLsFQ6c3FoUdloLWBQ==}
@@ -4954,8 +4954,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-plugin-astro@0.12.0:
-    resolution: {integrity: sha512-8E+9YQR6/5CPZJs8XsfBw579zrwZkc0Wb7x0fRVm/51JC8Iys4lBw4ecV8fHwpbQnzve86TUa4fJ08BJzqfWnA==}
+  prettier-plugin-astro@0.14.1:
+    resolution: {integrity: sha512-RiBETaaP9veVstE4vUwSIcdATj6dKmXljouXc/DDNwBSPTp8FRkLGDSGFClKsAFeeg+13SB0Z1JZvbD76bigJw==}
     engines: {node: ^14.15.0 || >=16.0.0}
 
   prettier-plugin-tailwindcss@0.5.6:
@@ -6298,9 +6298,9 @@ snapshots:
       jsonpointer: 5.0.1
       leven: 3.1.0
 
-  '@astrojs/compiler@1.7.0': {}
-
   '@astrojs/compiler@2.1.0': {}
+
+  '@astrojs/compiler@2.10.1': {}
 
   '@astrojs/compiler@2.8.0': {}
 
@@ -11600,17 +11600,17 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-astro@0.12.0:
+  prettier-plugin-astro@0.14.1:
     dependencies:
-      '@astrojs/compiler': 1.7.0
+      '@astrojs/compiler': 2.10.1
       prettier: 3.0.3
       sass-formatter: 0.7.6
 
-  prettier-plugin-tailwindcss@0.5.6(prettier-plugin-astro@0.12.0)(prettier@3.0.3):
+  prettier-plugin-tailwindcss@0.5.6(prettier-plugin-astro@0.14.1)(prettier@3.0.3):
     dependencies:
       prettier: 3.0.3
     optionalDependencies:
-      prettier-plugin-astro: 0.12.0
+      prettier-plugin-astro: 0.14.1
 
   prettier@3.0.3: {}
 
