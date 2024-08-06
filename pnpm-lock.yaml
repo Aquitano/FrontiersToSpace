@@ -21,8 +21,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@8.55.0)
       eslint-config-turbo:
-        specifier: ^1.13.2
-        version: 1.13.2(eslint@8.55.0)
+        specifier: ^2.0.12
+        version: 2.0.12(eslint@8.55.0)
       husky:
         specifier: ^8.0.3
         version: 8.0.3
@@ -3297,8 +3297,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-turbo@1.13.2:
-    resolution: {integrity: sha512-TzvsMwNJx/P4JYw79iFqbyQApnyT050gW7dBxnNeNVl3pVMnT2rwaFo9Q3Hc49Tp5NANxEwYN9RStF50P/IwGA==}
+  eslint-config-turbo@2.0.12:
+    resolution: {integrity: sha512-3PUzoyeJi2SjsTSjfWgTUIHK7kOqsapDEaOT7sCjFnZXvuhYLKxW37lysjq7+55abGGm0yQTXxNFLjrQKUORag==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -3313,8 +3313,8 @@ packages:
     peerDependencies:
       eslint: '>=7'
 
-  eslint-plugin-turbo@1.13.2:
-    resolution: {integrity: sha512-QNaihF0hTRjfOBd1SLHrftm8V3pOU35CNS/C0/Z6qY1xxdL1PSv4IctEIldSMX7/A1jOPYwMPO7wYwPXgjgp/g==}
+  eslint-plugin-turbo@2.0.12:
+    resolution: {integrity: sha512-vXWKer7F0RPTcVy1B+hFTEK4mlEOpouB8MCAFD3WW4C6t98wvuDCsIPjxIldpxg7CnwmRxALpNWgNVkU2LVVEQ==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -9502,10 +9502,10 @@ snapshots:
     dependencies:
       eslint: 8.55.0
 
-  eslint-config-turbo@1.13.2(eslint@8.55.0):
+  eslint-config-turbo@2.0.12(eslint@8.55.0):
     dependencies:
       eslint: 8.55.0
-      eslint-plugin-turbo: 1.13.2(eslint@8.55.0)
+      eslint-plugin-turbo: 2.0.12(eslint@8.55.0)
 
   eslint-plugin-react-hooks@4.6.0(eslint@8.55.0):
     dependencies:
@@ -9515,7 +9515,7 @@ snapshots:
     dependencies:
       eslint: 8.55.0
 
-  eslint-plugin-turbo@1.13.2(eslint@8.55.0):
+  eslint-plugin-turbo@2.0.12(eslint@8.55.0):
     dependencies:
       dotenv: 16.0.3
       eslint: 8.55.0
