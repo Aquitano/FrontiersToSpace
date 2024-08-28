@@ -10,7 +10,7 @@
         "postinstall": "prisma generate"
     },
     "devDependencies": {
-        "@types/cors": "^2.8.15",
+        "@types/cors": "^2.8.17",
         "@types/express": "^4.17.20",
         "prisma": "^5.18.0",
         "ts-node": "^10.9.2",
