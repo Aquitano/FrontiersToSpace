@@ -13,7 +13,7 @@
 		"@commitlint/config-conventional": "^19.2.2",
 		"eslint": "^8.55.0",
 		"eslint-config-prettier": "^9.1.0",
-		"eslint-config-turbo": "^1.13.2",
+		"eslint-config-turbo": "^2.1.1",
 		"husky": "^8.0.3",
 		"prettier": "^3.0.3",
 		"turbo": "^1.10.16"
