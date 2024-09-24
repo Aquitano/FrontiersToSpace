@@ -97,8 +97,8 @@ importers:
   apps/server:
     dependencies:
       '@prisma/client':
-        specifier: ^5.17.0
-        version: 5.17.0(prisma@5.18.0)
+        specifier: ^5.20.0
+        version: 5.20.0(prisma@5.18.0)
       '@trpc/server':
         specifier: ^10.45.2
         version: 10.45.2
@@ -1847,8 +1847,8 @@ packages:
       '@playform/document':
         optional: true
 
-  '@prisma/client@5.17.0':
-    resolution: {integrity: sha512-N2tnyKayT0Zf7mHjwEyE8iG7FwTmXDHFZ1GnNhQp0pJUObsuel4ZZ1XwfuAYkq5mRIiC/Kot0kt0tGCfLJ70Jw==}
+  '@prisma/client@5.20.0':
+    resolution: {integrity: sha512-CLv55ZuMuUawMsxoqxGtLT3bEZoa2W8L3Qnp6rDIFWy+ZBrUcOFKdoeGPSnbBqxc3SkdxJrF+D1veN/WNynZYA==}
     engines: {node: '>=16.13'}
     peerDependencies:
       prisma: '*'
@@ -7696,7 +7696,7 @@ snapshots:
       deepmerge-ts: 7.0.1
       fast-glob: 3.3.2
 
-  '@prisma/client@5.17.0(prisma@5.18.0)':
+  '@prisma/client@5.20.0(prisma@5.18.0)':
     optionalDependencies:
       prisma: 5.18.0
 
