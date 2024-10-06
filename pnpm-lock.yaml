@@ -3171,6 +3171,7 @@ packages:
   eslint@8.55.0:
     resolution: {integrity: sha512-iyUUAM0PCKj5QpwGfmCAG9XXbZCWsqP/eWAWrG/W0umvjuLRBECwSFdt+rCntju0xEH7teIABPwXpahftIaTdA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -8851,7 +8852,7 @@ snapshots:
       dom-serializer: 2.0.0
       domhandler: 5.0.3
       htmlparser2: 8.0.2
-      postcss: 8.4.41
+      postcss: 8.4.47
       pretty-bytes: 5.6.0
 
   cross-spawn@7.0.3:
@@ -8886,12 +8887,12 @@ snapshots:
   css-tree@2.2.1:
     dependencies:
       mdn-data: 2.0.28
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   css-tree@2.3.1:
     dependencies:
       mdn-data: 2.0.30
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   css-what@6.1.0: {}
 
@@ -12573,7 +12574,7 @@ snapshots:
     dependencies:
       browserslist: 4.23.1
       escalade: 3.1.2
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   uri-js@4.4.1:
     dependencies:
@@ -12650,7 +12651,7 @@ snapshots:
   vite@4.5.3(@types/node@20.12.12)(lightningcss@1.25.1)(sass@1.77.8)(terser@5.31.0):
     dependencies:
       esbuild: 0.18.17
-      postcss: 8.4.41
+      postcss: 8.4.47
       rollup: 3.29.3
     optionalDependencies:
       '@types/node': 20.12.12
