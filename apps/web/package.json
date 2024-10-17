@@ -23,7 +23,7 @@
 		"astro-critters": "^2.0.11",
 		"astro-icon": "^0.8.1",
 		"autoprefixer": "^10.4.19",
-		"prettier": "3.0.3",
+		"prettier": "3.3.3",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.6.8",
 		"rimraf": "^6.0.1",
