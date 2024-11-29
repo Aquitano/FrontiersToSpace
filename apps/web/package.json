@@ -20,7 +20,7 @@
 		"@types/micromodal": "^0.3.5",
 		"astro": "^3.3.2",
 		"astro-compress": "^2.3.3",
-		"astro-critters": "^2.0.11",
+		"astro-critters": "^2.2.0",
 		"astro-icon": "^0.8.1",
 		"autoprefixer": "^10.4.20",
 		"prettier": "3.3.3",
