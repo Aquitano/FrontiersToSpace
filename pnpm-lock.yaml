@@ -30,8 +30,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       turbo:
-        specifier: ^1.10.16
-        version: 1.10.16
+        specifier: ^2.3.3
+        version: 2.3.3
 
   apps/map:
     dependencies:
@@ -204,7 +204,7 @@ importers:
         version: 2.8.0
       tailwindcss:
         specifier: ^3.4.15
-        version: 3.4.15(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2))
+        version: 3.4.15(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2))
       tiny-invariant:
         specifier: ^1.3.3
         version: 1.3.3
@@ -217,7 +217,7 @@ importers:
         version: 3.2.1
       '@astrojs/tailwind':
         specifier: ^5.1.2
-        version: 5.1.2(astro@3.3.2(@types/node@22.5.0)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.34.1)(typescript@5.7.2))(tailwindcss@3.4.15(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2)))(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2))
+        version: 5.1.2(astro@3.3.2(@types/node@22.5.0)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.34.1)(typescript@5.7.2))(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2)))(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2))
       '@types/leaflet':
         specifier: ^1.9.14
         version: 1.9.14
@@ -5219,38 +5219,38 @@ packages:
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
 
-  turbo-darwin-64@1.10.16:
-    resolution: {integrity: sha512-+Jk91FNcp9e9NCLYlvDDlp2HwEDp14F9N42IoW3dmHI5ZkGSXzalbhVcrx3DOox3QfiNUHxzWg4d7CnVNCuuMg==}
+  turbo-darwin-64@2.3.3:
+    resolution: {integrity: sha512-bxX82xe6du/3rPmm4aCC5RdEilIN99VUld4HkFQuw+mvFg6darNBuQxyWSHZTtc25XgYjQrjsV05888w1grpaA==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@1.10.16:
-    resolution: {integrity: sha512-jqGpFZipIivkRp/i+jnL8npX0VssE6IAVNKtu573LXtssZdV/S+fRGYA16tI46xJGxSAivrZ/IcgZrV6Jk80bw==}
+  turbo-darwin-arm64@2.3.3:
+    resolution: {integrity: sha512-DYbQwa3NsAuWkCUYVzfOUBbSUBVQzH5HWUFy2Kgi3fGjIWVZOFk86ss+xsWu//rlEAfYwEmopigsPYSmW4X15A==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@1.10.16:
-    resolution: {integrity: sha512-PpqEZHwLoizQ6sTUvmImcRmACyRk9EWLXGlqceogPZsJ1jTRK3sfcF9fC2W56zkSIzuLEP07k5kl+ZxJd8JMcg==}
+  turbo-linux-64@2.3.3:
+    resolution: {integrity: sha512-eHj9OIB0dFaP6BxB88jSuaCLsOQSYWBgmhy2ErCu6D2GG6xW3b6e2UWHl/1Ho9FsTg4uVgo4DB9wGsKa5erjUA==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@1.10.16:
-    resolution: {integrity: sha512-TMjFYz8to1QE0fKVXCIvG/4giyfnmqcQIwjdNfJvKjBxn22PpbjeuFuQ5kNXshUTRaTJihFbuuCcb5OYFNx4uw==}
+  turbo-linux-arm64@2.3.3:
+    resolution: {integrity: sha512-NmDE/NjZoDj1UWBhMtOPmqFLEBKhzGS61KObfrDEbXvU3lekwHeoPvAMfcovzswzch+kN2DrtbNIlz+/rp8OCg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@1.10.16:
-    resolution: {integrity: sha512-+jsf68krs0N66FfC4/zZvioUap/Tq3sPFumnMV+EBo8jFdqs4yehd6+MxIwYTjSQLIcpH8KoNMB0gQYhJRLZzw==}
+  turbo-windows-64@2.3.3:
+    resolution: {integrity: sha512-O2+BS4QqjK3dOERscXqv7N2GXNcqHr9hXumkMxDj/oGx9oCatIwnnwx34UmzodloSnJpgSqjl8iRWiY65SmYoQ==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@1.10.16:
-    resolution: {integrity: sha512-sKm3hcMM1bl0B3PLG4ifidicOGfoJmOEacM5JtgBkYM48ncMHjkHfFY7HrJHZHUnXM4l05RQTpLFoOl/uIo2HQ==}
+  turbo-windows-arm64@2.3.3:
+    resolution: {integrity: sha512-dW4ZK1r6XLPNYLIKjC4o87HxYidtRRcBeo/hZ9Wng2XM/MqqYkAyzJXJGgRMsc0MMEN9z4+ZIfnSNBrA0b08ag==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@1.10.16:
-    resolution: {integrity: sha512-2CEaK4FIuSZiP83iFa9GqMTQhroW2QryckVqUydmg4tx78baftTOS0O+oDAhvo9r9Nit4xUEtC1RAHoqs6ZEtg==}
+  turbo@2.3.3:
+    resolution: {integrity: sha512-DUHWQAcC8BTiUZDRzAYGvpSpGLiaOQPfYXlCieQbwUvmml/LRGIe3raKdrOPOoiX0DYlzxs2nH6BoWJoZrj8hA==}
     hasBin: true
 
   type-check@0.4.0:
@@ -5756,13 +5756,13 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/tailwind@5.1.2(astro@3.3.2(@types/node@22.5.0)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.34.1)(typescript@5.7.2))(tailwindcss@3.4.15(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2)))(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2))':
+  '@astrojs/tailwind@5.1.2(astro@3.3.2(@types/node@22.5.0)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.34.1)(typescript@5.7.2))(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2)))(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2))':
     dependencies:
       astro: 3.3.2(@types/node@22.5.0)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.34.1)(typescript@5.7.2)
       autoprefixer: 10.4.20(postcss@8.4.47)
       postcss: 8.4.47
-      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2))
-      tailwindcss: 3.4.15(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2))
+      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2))
+      tailwindcss: 3.4.15(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2))
     transitivePeerDependencies:
       - ts-node
 
@@ -10271,7 +10271,7 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.47
 
-  postcss-load-config@4.0.2(postcss@8.4.47)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2)):
+  postcss-load-config@4.0.2(postcss@8.4.47)(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2)):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
@@ -11004,7 +11004,7 @@ snapshots:
       csso: 5.0.5
       picocolors: 1.1.0
 
-  tailwindcss@3.4.15(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2)):
+  tailwindcss@3.4.15(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -11023,7 +11023,7 @@ snapshots:
       postcss: 8.4.47
       postcss-import: 15.1.0(postcss@8.4.47)
       postcss-js: 4.0.1(postcss@8.4.47)
-      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@swc/core@1.4.2)(@types/node@22.5.0)(typescript@5.7.2))
+      postcss-load-config: 4.0.2(postcss@8.4.47)(ts-node@10.9.2(@types/node@22.5.0)(typescript@5.7.2))
       postcss-nested: 6.2.0(postcss@8.4.47)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.8
@@ -11181,32 +11181,32 @@ snapshots:
       safe-buffer: 5.2.1
     optional: true
 
-  turbo-darwin-64@1.10.16:
+  turbo-darwin-64@2.3.3:
     optional: true
 
-  turbo-darwin-arm64@1.10.16:
+  turbo-darwin-arm64@2.3.3:
     optional: true
 
-  turbo-linux-64@1.10.16:
+  turbo-linux-64@2.3.3:
     optional: true
 
-  turbo-linux-arm64@1.10.16:
+  turbo-linux-arm64@2.3.3:
     optional: true
 
-  turbo-windows-64@1.10.16:
+  turbo-windows-64@2.3.3:
     optional: true
 
-  turbo-windows-arm64@1.10.16:
+  turbo-windows-arm64@2.3.3:
     optional: true
 
-  turbo@1.10.16:
+  turbo@2.3.3:
     optionalDependencies:
-      turbo-darwin-64: 1.10.16
-      turbo-darwin-arm64: 1.10.16
-      turbo-linux-64: 1.10.16
-      turbo-linux-arm64: 1.10.16
-      turbo-windows-64: 1.10.16
-      turbo-windows-arm64: 1.10.16
+      turbo-darwin-64: 2.3.3
+      turbo-darwin-arm64: 2.3.3
+      turbo-linux-64: 2.3.3
+      turbo-linux-arm64: 2.3.3
+      turbo-windows-64: 2.3.3
+      turbo-windows-arm64: 2.3.3
 
   type-check@0.4.0:
     dependencies:
