@@ -51,18 +51,18 @@ importers:
         specifier: ^2.6.4
         version: 2.6.4
       react:
-        specifier: ^18.2.0
-        version: 18.2.0
+        specifier: ^19.0.0
+        version: 19.0.0
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.2.0(react@19.0.0)
       react-leaflet:
         specifier: ^4.2.1
-        version: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.56
-        version: 18.2.56
+        specifier: ^19.0.7
+        version: 19.0.7
       '@types/react-dom':
         specifier: ^18.2.13
         version: 18.2.13
@@ -144,22 +144,22 @@ importers:
     dependencies:
       '@astrojs/react':
         specifier: ^3.3.0
-        version: 3.3.0(@types/react-dom@18.2.13)(@types/react@18.2.56)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vite@4.5.3(@types/node@22.10.7)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.37.0))
+        version: 3.3.0(@types/react-dom@18.2.13)(@types/react@19.0.7)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)(vite@4.5.3(@types/node@22.10.7)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.37.0))
       '@fontsource/inter':
         specifier: ^4.5.15
         version: 4.5.15
       '@tanstack/react-query':
         specifier: ^4.35.3
-        version: 4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.35.3(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
       '@trpc/client':
         specifier: ^10.45.2
         version: 10.45.2
       '@trpc/react-query':
         specifier: ^10.45.1
-        version: 10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.45.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@19.0.0))(react@19.0.0))(@trpc/client@10.45.2)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
       '@types/react':
-        specifier: ^18.2.56
-        version: 18.2.56
+        specifier: ^19.0.7
+        version: 19.0.7
       '@types/react-dom':
         specifier: ^18.2.13
         version: 18.2.13
@@ -185,17 +185,17 @@ importers:
         specifier: ^0.4.10
         version: 0.4.10
       react:
-        specifier: ^18.2.0
-        version: 18.2.0
+        specifier: ^19.0.0
+        version: 19.0.0
       react-chartjs-2:
         specifier: ^5.2.0
-        version: 5.2.0(chart.js@4.4.0)(react@18.2.0)
+        version: 5.2.0(chart.js@4.4.0)(react@19.0.0)
       react-dom:
         specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
+        version: 18.2.0(react@19.0.0)
       react-leaflet:
         specifier: ^4.2.1
-        version: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -2177,9 +2177,6 @@ packages:
   '@types/parse5@6.0.3':
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
 
-  '@types/prop-types@15.7.5':
-    resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-
   '@types/qs@6.9.7':
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
 
@@ -2189,17 +2186,14 @@ packages:
   '@types/react-dom@18.2.13':
     resolution: {integrity: sha512-eJIUv7rPP+EC45uNYp/ThhSpE16k22VJUknt5OLoH9tbXoi8bMhwLf5xRuWMywamNbWzhrSmU7IBJfPup1+3fw==}
 
-  '@types/react@18.2.56':
-    resolution: {integrity: sha512-NpwHDMkS/EFZF2dONFQHgkPRwhvgq/OAvIaGQzxGSBmaeR++kTg6njr15Vatz0/2VcCEwJQFi6Jf4Q0qBu0rLA==}
+  '@types/react@19.0.7':
+    resolution: {integrity: sha512-MoFsEJKkAtZCrC1r6CM8U22GzhG7u2Wir8ons/aCKH6MBdD1ibV24zOSSkdZVUKqN5i396zG5VKLYZ3yaUZdLA==}
 
   '@types/resolve@1.17.1':
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
 
   '@types/sax@1.2.4':
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
-
-  '@types/scheduler@0.16.3':
-    resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
 
   '@types/serve-static@1.15.1':
     resolution: {integrity: sha512-NUo5XNiAdULrJENtJXZZ3fHtfMolzZwczzBbnAeBbqBwG+LaG6YaJtuwzwGSQZ2wsCrxjEhNNjAkKigy3n8teQ==}
@@ -2807,8 +2801,8 @@ packages:
     resolution: {integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
 
-  csstype@3.1.2:
-    resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
+  csstype@3.1.3:
+    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
   dargs@8.1.0:
     resolution: {integrity: sha512-wAV9QHOsNbwnWdNW2FYvE1P56wtgSbM+3SZcdGiWQILwVjACCXDCI3Ai8QlCjMDB8YK5zySiXZYBiwGmNY3lnw==}
@@ -4848,8 +4842,8 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react@18.2.0:
-    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
+  react@19.0.0:
+    resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -6016,13 +6010,13 @@ snapshots:
     dependencies:
       prismjs: 1.29.0
 
-  '@astrojs/react@3.3.0(@types/react-dom@18.2.13)(@types/react@18.2.56)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vite@4.5.3(@types/node@22.10.7)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.37.0))':
+  '@astrojs/react@3.3.0(@types/react-dom@18.2.13)(@types/react@19.0.7)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)(vite@4.5.3(@types/node@22.10.7)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.37.0))':
     dependencies:
-      '@types/react': 18.2.56
+      '@types/react': 19.0.7
       '@types/react-dom': 18.2.13
       '@vitejs/plugin-react': 4.2.1(vite@4.5.3(@types/node@22.10.7)(lightningcss@1.27.0)(sass@1.80.6)(terser@5.37.0))
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 19.0.0
+      react-dom: 18.2.0(react@19.0.0)
       ultrahtml: 1.5.2
     transitivePeerDependencies:
       - supports-color
@@ -7559,11 +7553,11 @@ snapshots:
     dependencies:
       '@prisma/debug': 6.2.1
 
-  '@react-leaflet/core@2.1.0(leaflet@1.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@react-leaflet/core@2.1.0(leaflet@1.9.4)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       leaflet: 1.9.4
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 19.0.0
+      react-dom: 18.2.0(react@19.0.0)
 
   '@rollup/plugin-babel@5.3.1(@babel/core@7.24.6)(@types/babel__core@7.20.5)(rollup@2.79.2)':
     dependencies:
@@ -7715,22 +7709,22 @@ snapshots:
 
   '@tanstack/query-core@4.35.3': {}
 
-  '@tanstack/react-query@4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@tanstack/react-query@4.35.3(react-dom@18.2.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@tanstack/query-core': 4.35.3
-      react: 18.2.0
-      use-sync-external-store: 1.2.0(react@18.2.0)
+      react: 19.0.0
+      use-sync-external-store: 1.2.0(react@19.0.0)
     optionalDependencies:
-      react-dom: 18.2.0(react@18.2.0)
+      react-dom: 18.2.0(react@19.0.0)
 
   '@trpc/client@10.45.2': {}
 
-  '@trpc/react-query@10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.45.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@trpc/react-query@10.45.1(@tanstack/react-query@4.35.3(react-dom@18.2.0(react@19.0.0))(react@19.0.0))(@trpc/client@10.45.2)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@tanstack/react-query': 4.35.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@tanstack/react-query': 4.35.3(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
       '@trpc/client': 10.45.2
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 19.0.0
+      react-dom: 18.2.0(react@19.0.0)
 
   '@trpc/server@10.45.2': {}
 
@@ -7882,21 +7876,17 @@ snapshots:
 
   '@types/parse5@6.0.3': {}
 
-  '@types/prop-types@15.7.5': {}
-
   '@types/qs@6.9.7': {}
 
   '@types/range-parser@1.2.4': {}
 
   '@types/react-dom@18.2.13':
     dependencies:
-      '@types/react': 18.2.56
+      '@types/react': 19.0.7
 
-  '@types/react@18.2.56':
+  '@types/react@19.0.7':
     dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.3
-      csstype: 3.1.2
+      csstype: 3.1.3
 
   '@types/resolve@1.17.1':
     dependencies:
@@ -7905,8 +7895,6 @@ snapshots:
   '@types/sax@1.2.4':
     dependencies:
       '@types/node': 22.5.0
-
-  '@types/scheduler@0.16.3': {}
 
   '@types/serve-static@1.15.1':
     dependencies:
@@ -8757,7 +8745,7 @@ snapshots:
     dependencies:
       css-tree: 2.2.1
 
-  csstype@3.1.2: {}
+  csstype@3.1.3: {}
 
   dargs@8.1.0: {}
 
@@ -11030,29 +11018,27 @@ snapshots:
       strip-json-comments: 2.0.1
     optional: true
 
-  react-chartjs-2@5.2.0(chart.js@4.4.0)(react@18.2.0):
+  react-chartjs-2@5.2.0(chart.js@4.4.0)(react@19.0.0):
     dependencies:
       chart.js: 4.4.0
-      react: 18.2.0
+      react: 19.0.0
 
-  react-dom@18.2.0(react@18.2.0):
+  react-dom@18.2.0(react@19.0.0):
     dependencies:
       loose-envify: 1.4.0
-      react: 18.2.0
+      react: 19.0.0
       scheduler: 0.23.0
 
-  react-leaflet@4.2.1(leaflet@1.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-leaflet@4.2.1(leaflet@1.9.4)(react-dom@18.2.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      '@react-leaflet/core': 2.1.0(leaflet@1.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@react-leaflet/core': 2.1.0(leaflet@1.9.4)(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
       leaflet: 1.9.4
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
+      react: 19.0.0
+      react-dom: 18.2.0(react@19.0.0)
 
   react-refresh@0.14.0: {}
 
-  react@18.2.0:
-    dependencies:
-      loose-envify: 1.4.0
+  react@19.0.0: {}
 
   read-cache@1.0.0:
     dependencies:
@@ -12106,9 +12092,9 @@ snapshots:
     dependencies:
       punycode: 2.3.0
 
-  use-sync-external-store@1.2.0(react@18.2.0):
+  use-sync-external-store@1.2.0(react@19.0.0):
     dependencies:
-      react: 18.2.0
+      react: 19.0.0
 
   util-deprecate@1.0.2: {}
 
