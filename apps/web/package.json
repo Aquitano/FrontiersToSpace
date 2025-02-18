@@ -19,7 +19,7 @@
 		"@types/leaflet": "^1.9.14",
 		"@types/micromodal": "^0.3.5",
 		"astro": "^3.3.2",
-		"astro-compress": "^2.3.3",
+		"astro-compress": "^2.3.6",
 		"astro-critters": "^2.2.1",
 		"astro-icon": "^0.8.1",
 		"autoprefixer": "^10.4.20",
