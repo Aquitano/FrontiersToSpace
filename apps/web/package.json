@@ -30,7 +30,7 @@
 		"sass": "^1.88.0"
 	},
 	"dependencies": {
-		"@astrojs/react": "^3.3.0",
+		"@astrojs/react": "^4.2.7",
 		"@fontsource/inter": "^4.5.15",
 		"@tanstack/react-query": "^4.35.3",
 		"@trpc/client": "^10.45.2",
