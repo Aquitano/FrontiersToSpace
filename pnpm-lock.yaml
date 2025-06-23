@@ -219,8 +219,8 @@ importers:
         specifier: ^5.1.2
         version: 5.1.2(astro@3.3.2(@types/node@24.0.3)(lightningcss@1.28.2)(sass@1.89.2)(terser@5.43.1)(typescript@5.8.3))(tailwindcss@3.4.15(ts-node@10.9.2(@swc/core@1.12.1)(@types/node@24.0.3)(typescript@5.8.3)))(ts-node@10.9.2(@swc/core@1.12.1)(@types/node@24.0.3)(typescript@5.8.3))
       '@types/leaflet':
-        specifier: ^1.9.14
-        version: 1.9.14
+        specifier: ^1.9.18
+        version: 1.9.18
       '@types/micromodal':
         specifier: ^0.3.5
         version: 0.3.5
@@ -2259,8 +2259,8 @@ packages:
   '@types/fs-extra@11.0.4':
     resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
 
-  '@types/geojson@7946.0.10':
-    resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
+  '@types/geojson@7946.0.16':
+    resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
 
   '@types/hast@2.3.5':
     resolution: {integrity: sha512-SvQi0L/lNpThgPoleH53cdjB3y9zpLlVjRbqB3rH8hx1jiRSBGAhyjV3H+URFjNVRqt2EdYNrbZE5IsGlNfpRg==}
@@ -2274,8 +2274,8 @@ packages:
   '@types/jsonfile@6.1.1':
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
 
-  '@types/leaflet@1.9.14':
-    resolution: {integrity: sha512-sx2q6MDJaajwhKeVgPSvqXd8rhNJSTA3tMidQGduZn9S6WBYxDkCpSpV5xXEmSg7Cgdk/5vJGhVF1kMYLzauBg==}
+  '@types/leaflet@1.9.18':
+    resolution: {integrity: sha512-ht2vsoPjezor5Pmzi5hdsA7F++v5UGq9OlUduWHmMZiuQGIpJ2WS5+Gg9HaAA79gNh1AIPtCqhzejcIZ3lPzXQ==}
 
   '@types/mdast@3.0.12':
     resolution: {integrity: sha512-DT+iNIRNX884cx0/Q1ja7NyUPpZuv0KPyL5rGNxm1WC1OtHstl7n4Jb7nk+xacNShQMbczJjt8uFzznpp6kYBg==}
@@ -8128,7 +8128,7 @@ snapshots:
       '@types/jsonfile': 6.1.1
       '@types/node': 22.5.0
 
-  '@types/geojson@7946.0.10': {}
+  '@types/geojson@7946.0.16': {}
 
   '@types/hast@2.3.5':
     dependencies:
@@ -8144,9 +8144,9 @@ snapshots:
     dependencies:
       '@types/node': 22.5.0
 
-  '@types/leaflet@1.9.14':
+  '@types/leaflet@1.9.18':
     dependencies:
-      '@types/geojson': 7946.0.10
+      '@types/geojson': 7946.0.16
 
   '@types/mdast@3.0.12':
     dependencies:
