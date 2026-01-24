@@ -1,9 +1,19 @@
 # ASG Stratosphärenmission Map Application
 
-This is the apps/map directory of the ASG Stratosphärenmission project. It contains the code for the interactive map used in the project, which visualizes the various receiver locations for the stratospheric balloon expedition.
+> **Deprecated:** This application is no longer actively hosted or maintained. The functionality has been partially integrated into the main web application at `apps/web`.
+
+This is the apps/map directory of the ASG Stratosphärenmission project. It was originally developed as a standalone offline-capable map application for visualizing receiver locations during the stratospheric balloon expedition.
 
 ## Technologies Used
 
-- **React.js**: A JavaScript library for building user interfaces.
-- **million.js**: A extremely lightweight (<4kb) virtual DOM that makes React components faster.
-- **Leaflet**: An open-source JavaScript library for mobile-friendly interactive maps.
+- **React.js**: JavaScript library for building user interfaces
+- **Million.js**: Lightweight virtual DOM for React performance optimization
+- **Leaflet**: Open-source JavaScript library for interactive maps
+- **Leaflet.offline**: Plugin for offline tile storage and retrieval
+- **Vite**: Build tool and development server
+
+## Features (Historical)
+
+- Offline tile caching for map usage without internet
+- Repeater location markers with detailed information
+- PWA support for mobile installation
