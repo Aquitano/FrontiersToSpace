@@ -2,7 +2,7 @@
 import L, { Control } from 'leaflet';
 import 'leaflet.offline';
 import { block } from 'million/react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import { useMap } from './hooks';
 import { repeaters } from './repeaters.js';
@@ -74,7 +74,7 @@ const useTileLayerOffline = (
 	}, [map, setProgress, setTotal]);
 };
 
-const App = block(() => {
+const App = () => {
 	const { position } = useMap();
 	const [map, setMap] = useState(null);
 	const [progress, setProgress] = useState(0);
@@ -145,6 +145,8 @@ const App = block(() => {
 			</MapContainer>
 		</>
 	);
-});
+};
 
-export default App;
+const BlockedApp = block(App) as React.FC;
+BlockedApp.displayName = 'App';
+export default BlockedApp;
