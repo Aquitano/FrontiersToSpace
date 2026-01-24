@@ -1,11 +1,8 @@
 ---
-import { Picture } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 import starhipImage from "~/assets/starship.svg";
 import Starfield from "~/components/starfield.astro";
 import GitHubCorner from "./github-corner.astro";
-
-const widths = [350, 600];
-const sizes = "(min-width: 640px) 49vw, 57vw";
 ---
 
 <section class="relative h-full bg-black">
@@ -27,11 +24,9 @@ const sizes = "(min-width: 640px) 49vw, 57vw";
       id="spaceship"
       class="z-40 w-2/3 max-w-3xl self-start sm:w-10/12 sm:self-auto sm:justify-self-start md:pr-14"
     >
-      <Picture
+      <Image
         class="h-full w-full rotate-12 object-cover"
         src={starhipImage}
-        widths={widths}
-        sizes={sizes}
         loading="eager"
         alt="A spaceship embarking on a journey to space"
       />

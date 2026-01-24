@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import ThemeSwitcher from "~/components/theme-switcher.astro";
 import type { NavItem } from "~/types";
 
@@ -44,7 +44,7 @@ const { fixed } = Astro.props;
         class="btn sm:hidden"
         aria-label="Navigation"
       >
-        <Icon pack="mdi" name="menu" class="h-8" />
+        <Icon name="mdi:menu" class="h-8" />
       </button>
       <ThemeSwitcher />
     </div>
@@ -58,11 +58,11 @@ const { fixed } = Astro.props;
               class="btn"
               aria-label="Close navigation"
             >
-              <Icon pack="mdi" name="close" class="h-8" />
+              <Icon name="mdi:close" class="h-8" />
             </button>
           </header>
           <div class="flex justify-center">
-            <Icon name="logomark" class="h-16" />
+            <Icon name="local:logomark" class="h-16" />
           </div>
           <nav>
             <ul class="flex flex-col">

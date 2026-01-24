@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 ---
 
 <!--
@@ -12,11 +12,11 @@ import { Icon } from "astro-icon";
   class="-ml-14 origin-[right_center] scale-0 transition-all duration-500"
 >
   <div id="icon-theme-light">
-    <Icon name="theme/light" class="h-8" />
+    <Icon name="local:theme/light" class="h-8" />
     <span class="sr-only">Use light theme</span>
   </div>
   <div id="icon-theme-dark" class="hidden">
-    <Icon name="theme/dark" class="h-8" />
+    <Icon name="local:theme/dark" class="h-8" />
     <span class="sr-only">Use dark theme</span>
   </div>
 </button>

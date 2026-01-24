@@ -10,8 +10,7 @@ import {
 	type TooltipItem,
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
-import { CrosshairPlugin } from 'chartjs-plugin-crosshair';
-import L, { LatLngTuple } from 'leaflet';
+import L, { type LatLngTuple } from 'leaflet';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
 import 'leaflet-geometryutil';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -40,7 +39,6 @@ ChartJS.register(
 	Tooltip,
 	Legend,
 	annotationPlugin,
-	CrosshairPlugin,
 );
 
 /**
@@ -76,21 +74,6 @@ const baseOptions: optionsProps = {
 						yAdjust: -40,
 					},
 				},
-			},
-		},
-		// @ts-expect-error
-		crosshair: {
-			line: {
-				color: '#F66',
-				width: 1,
-			},
-			sync: {
-				enabled: true,
-				group: 1,
-				suppressTooltips: false,
-			},
-			zoom: {
-				enabled: false,
 			},
 		},
 	},

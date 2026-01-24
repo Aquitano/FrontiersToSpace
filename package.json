@@ -11,11 +11,15 @@
 	"devDependencies": {
 		"@commitlint/cli": "^19.6.0",
 		"@commitlint/config-conventional": "^19.8.1",
-		"eslint": "^8.55.0",
+		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-config-turbo": "^2.3.3",
 		"husky": "^9.1.7",
 		"prettier": "^3.3.3",
-		"turbo": "^1.10.16"
-	}
+		"turbo": "^2.3.3"
+	},
+	"workspaces": [
+		"apps/*"
+	],
+	"packageManager": "pnpm@9.15.0"
 }
