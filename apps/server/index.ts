@@ -23,7 +23,6 @@ export type InputSchema = z.infer<typeof PostInputSchema>;
 
 const app = express();
 const port = process.env.PORT || 8080;
-const host = process.env.HOST || '0.0.0.0';
 
 app.use(helmet());
 
@@ -62,6 +61,7 @@ app.post('/', (req: Request, res: Response) => {
 
         res.status(200).send('Data received');
     } catch (error) {
+        console.error('Invalid data received:', error);
         res.status(400).send('Invalid data');
     }
 });

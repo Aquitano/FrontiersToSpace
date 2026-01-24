@@ -1,18 +1,16 @@
 ---
-import '@fontsource/inter/variable.css';
+import '@fontsource-variable/inter';
 import HeaderDark from '~/components/header-dark.astro';
 import '~/styles/index.css';
-import GitHubCorner from '~/components/github-corner.astro';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import MapMain from '../components/MapOverview';
 
 const { generator, site } = Astro;
-const image = new URL('social.jpg', site);
 const description =
 	"Entdecke die Stratosphäre, einfacher. 'ASG Stratosphärenmission' ist ein innovatives Schülerprojekt, das Wissenschaft verbindet. Rasante Datenerfassung trifft auf inspirierende Lernmomente.";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="h-full motion-safe:scroll-smooth" data-theme="dark">
 	<head>
 		<meta charset="utf-8" />

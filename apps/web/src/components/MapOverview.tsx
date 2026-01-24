@@ -265,7 +265,7 @@ const MapMain = (): JSX.Element => {
 	 *
 	 * @param {Object} event - The click event object.
 	 */
-	const handlePolylineClick = useCallback((event: { latlng: any }) => {
+	const handlePolylineClick = useCallback((event: { latlng: L.LatLng }) => {
 		if (!map.current) return;
 
 		const threshold = 5;
