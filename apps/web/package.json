@@ -24,7 +24,7 @@
 		"astro-icon": "^1.1.5",
 		"autoprefixer": "^10.4.23",
 		"baseline-browser-mapping": "^2.9.19",
-		"prettier": "3.8.1",
+		"prettier": "3.8.4",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"rimraf": "^6.1.2",
