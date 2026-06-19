@@ -26,5 +26,11 @@
 	"workspaces": [
 		"apps/*"
 	],
-	"packageManager": "pnpm@9.15.0"
+	"packageManager": "pnpm@9.15.0",
+	"pnpm": {
+		"overrides": {
+			"js-yaml@<4.2.0": ">=4.2.0",
+			"smol-toml@<1.6.1": ">=1.6.1"
+		}
+	}
 }
