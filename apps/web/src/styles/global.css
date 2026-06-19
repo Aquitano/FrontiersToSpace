@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* TODO: consider creating <Button> and <GradientText> components */
 a,
 .btn {
