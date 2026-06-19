@@ -28,7 +28,7 @@
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"rimraf": "^6.1.2",
-		"sass": "^1.97.3"
+		"sass": "^1.101.0"
 	},
 	"dependencies": {
 		"@astrojs/react": "^5.0.7",
