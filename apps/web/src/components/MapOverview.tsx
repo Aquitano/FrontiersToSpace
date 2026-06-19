@@ -15,7 +15,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-geometryutil';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { MapContainer, Marker, Polyline, Popup, TileLayer } from 'react-leaflet';
 import markerIcon from '../assets/balloon.png';
@@ -211,7 +211,7 @@ const initialState = {
 	showChartPA: false,
 	location: [0, 0],
 
-	isSmallScreen: window.innerWidth <= 768,
+	isSmallScreen: window.innerWidth < 768,
 	currentGraph: 'TL',
 };
 
@@ -333,121 +333,80 @@ const MapMain = (): JSX.Element => {
 	};
 
 	/**
-	 * Updates the chart data for pressure and altitude based on the weather data.
+	 * Builds both chart datasets and the latest map location from the weather data.
 	 */
 	useEffect(() => {
-		if (data) {
-			const times = data.map((entry) => {
-				const date = new Date(entry.date * 1000);
-				if (date.getMinutes().toString().length === 1) {
-					return `${date.getHours()}:0${date.getMinutes()}`;
-				}
-				return `${date.getHours()}:${date.getMinutes()}`;
-			});
-			const temps = data.map((entry) => entry.tmp.toFixed(2));
-			const humidity = data.map((entry) => entry.hum);
+		if (!data || data.length === 0) return;
 
-			setState((prevState) => ({
-				...prevState,
-				chartDataTL: {
-					labels: times,
-					datasets: [
-						{
-							label: 'Temperatur (°C)',
-							data: temps,
-							fill: false,
-							backgroundColor: 'rgb(75, 192, 192)',
-							borderColor: 'rgba(75, 192, 192, 0.6)',
-							tension: 1,
-							pointRadius: 0.4,
-							yAxisID: 'temp',
-						},
-						{
-							label: 'Luftfeuchtigkeit (%)',
-							data: humidity,
-							fill: false,
-							backgroundColor: 'rgb(255, 99, 132)',
-							borderColor: 'rgba(255, 99, 132, 0.6)',
-							tension: 1,
-							pointRadius: 0.4,
-							yAxisID: 'hum',
-						},
-					],
-				},
-				showChartTL: true,
-			}));
-		}
-	}, [data]);
-
-	/**
-	 * Updates the chart data for pressure and altitude based on the weather data.
-	 */
-	useEffect(() => {
-		if (data) {
-			const pressureData = data
-				.map((entry) => ({
-					time: entry.date,
-					pressure: entry.pss,
-					altitude: entry.alt,
-				}))
-				.filter((entry) => entry.pressure !== null && entry.altitude !== null);
-
-			const times = pressureData.map((entry) => {
-				const date = new Date(entry.time * 1000);
-				if (date.getMinutes().toString().length === 1) {
-					return `${date.getHours()}:0${date.getMinutes()}`;
-				}
-				return `${date.getHours()}:${date.getMinutes()}`;
-			});
-
-			const pressures = pressureData.map((entry) => entry.pressure.toFixed(2));
-			const altitudes = pressureData.map((entry) => entry.altitude.toFixed(2));
-
-			if (pressures.length > 0 && altitudes.length > 0) {
-				setState((prevState) => ({
-					...prevState,
-					chartDataPA: {
-						labels: times,
-						datasets: [
-							{
-								label: 'Luftdruck (hPa)',
-								data: pressures,
-								yAxisID: 'pressure',
-								fill: false,
-								backgroundColor: 'rgb(75, 192, 192)',
-								borderColor: 'rgba(75, 192, 192, 0.6)',
-								tension: 1,
-								pointRadius: 0.4,
-							},
-							{
-								label: 'Höhe (m)',
-								data: altitudes,
-								yAxisID: 'altitude',
-								fill: false,
-								backgroundColor: 'rgb(255, 99, 132)',
-								borderColor: 'rgba(255, 99, 132, 0.6)',
-								tension: 1,
-								pointRadius: 0.4,
-							},
-						],
-					},
-					showChartPA: true,
-				}));
+		const times = data.map((entry) => {
+			const date = new Date(entry.date * 1000);
+			if (date.getMinutes().toString().length === 1) {
+				return `${date.getHours()}:0${date.getMinutes()}`;
 			}
-		}
-	}, [data]);
+			return `${date.getHours()}:${date.getMinutes()}`;
+		});
+		const temps = data.map((entry) => entry.tmp.toFixed(2));
+		const humidity = data.map((entry) => entry.hum);
+		const pressures = data.map((entry) => entry.pss.toFixed(2));
+		const altitudes = data.map((entry) => entry.alt.toFixed(2));
+		const lastDataPoint = data[data.length - 1];
 
-	/**
-	 * Updates the map location based on the latest data point.
-	 */
-	useEffect(() => {
-		if (data) {
-			const lastDataPoint = data[data.length - 1];
-			setState((prevState) => ({
-				...prevState,
-				location: [lastDataPoint.lat, lastDataPoint.lon],
-			}));
-		}
+		setState((prevState) => ({
+			...prevState,
+			chartDataTL: {
+				labels: times,
+				datasets: [
+					{
+						label: 'Temperatur (°C)',
+						data: temps,
+						fill: false,
+						backgroundColor: 'rgb(75, 192, 192)',
+						borderColor: 'rgba(75, 192, 192, 0.6)',
+						tension: 1,
+						pointRadius: 0.4,
+						yAxisID: 'temp',
+					},
+					{
+						label: 'Luftfeuchtigkeit (%)',
+						data: humidity,
+						fill: false,
+						backgroundColor: 'rgb(255, 99, 132)',
+						borderColor: 'rgba(255, 99, 132, 0.6)',
+						tension: 1,
+						pointRadius: 0.4,
+						yAxisID: 'hum',
+					},
+				],
+			},
+			showChartTL: true,
+			chartDataPA: {
+				labels: times,
+				datasets: [
+					{
+						label: 'Luftdruck (hPa)',
+						data: pressures,
+						yAxisID: 'pressure',
+						fill: false,
+						backgroundColor: 'rgb(75, 192, 192)',
+						borderColor: 'rgba(75, 192, 192, 0.6)',
+						tension: 1,
+						pointRadius: 0.4,
+					},
+					{
+						label: 'Höhe (m)',
+						data: altitudes,
+						yAxisID: 'altitude',
+						fill: false,
+						backgroundColor: 'rgb(255, 99, 132)',
+						borderColor: 'rgba(255, 99, 132, 0.6)',
+						tension: 1,
+						pointRadius: 0.4,
+					},
+				],
+			},
+			showChartPA: true,
+			location: [lastDataPoint.lat, lastDataPoint.lon],
+		}));
 	}, [data]);
 
 	/**
@@ -598,4 +557,4 @@ const MapMain = (): JSX.Element => {
 	);
 };
 
-export default memo(MapMain);
+export default MapMain;
