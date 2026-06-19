@@ -13,14 +13,13 @@
 		"clean": "rimraf dist .astro node_modules"
 	},
 	"devDependencies": {
-		"@astrojs/tailwind": "^5.1.4",
 		"@iconify-json/fa-brands": "^1.2.0",
 		"@iconify-json/mdi": "^1.2.0",
 		"@types/leaflet": "^1.9.21",
 		"@types/micromodal": "^0.3.5",
 		"@types/react": "^19.2.9",
 		"@types/react-dom": "^19.2.3",
-		"astro": "^5.16.15",
+		"astro": "^6.1.6",
 		"astro-compress": "^2.3.9",
 		"astro-icon": "^1.1.5",
 		"autoprefixer": "^10.4.23",
@@ -32,7 +31,7 @@
 		"sass": "^1.97.3"
 	},
 	"dependencies": {
-		"@astrojs/react": "^4.4.2",
+		"@astrojs/react": "^5.0.7",
 		"@fontsource-variable/inter": "^5.2.8",
 		"chart.js": "^4.5.1",
 		"chartjs-plugin-annotation": "^3.1.0",
