@@ -23,7 +23,7 @@
 		"astro-compress": "^2.4.1",
 		"astro-icon": "^1.1.5",
 		"autoprefixer": "^10.4.23",
-		"baseline-browser-mapping": "^2.9.19",
+		"baseline-browser-mapping": "^2.11.0",
 		"prettier": "3.8.1",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
